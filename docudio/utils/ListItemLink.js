@@ -13,7 +13,7 @@ export default function ListItemLink (props) {
       passHref
 
     >
-      <ListItem button className={className} >
+      <ListItem onClick={props.handleDrawerClose} button className={className} >
         {actions ? <ListItemSecondaryAction>
           {actions}
         </ListItemSecondaryAction>

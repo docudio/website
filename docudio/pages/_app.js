@@ -6,7 +6,9 @@ import createSagaMiddleware from 'redux-saga'
 import rootSaga from '../sagas/root-saga'
 import { SnackbarProvider } from 'notistack'
 import '../utils/index.css'
+import Hidden from '@material-ui/core/Hidden'
 import Notifier from '../utils/Notifier'
+import withWidth from '@material-ui/core/withWidth'
 // import apm from '../utils/rum'
 import '../utils/App.css'
 import Head from 'next/head'
@@ -38,11 +40,11 @@ const useStyles = makeStyles(theme => ({
     zIndex: theme.zIndex.drawer + 1
   },
   drawer: {
-    width: drawerWidth,
+  //  width: drawerWidth,
     flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth
+    // width: drawerWidth
   },
   content: {
     flexGrow: 1
@@ -93,10 +95,14 @@ function WrappedApp (props) {
       dispatch(loadApp())
     }
   }, [dispatch, appLoaded])
-  const [open, setOpen] = React.useState(true)
+  const [open, setOpen] = React.useState(props.width != 'xs')
 
   const handleDrawerOpen = () => {
-    setOpen(true)
+    if (open === true) {
+      setOpen(false)
+    } else {
+      setOpen(true)
+    }
   }
 
   const handleDrawerClose = () => {
@@ -158,7 +164,7 @@ function WrappedApp (props) {
 
                 <Grid container direction='row'
                   spacing={4} >
-                  <Grid item xl={2} sm={2} md={2} lg={2} >
+                  <Grid item xl={2} xs={4} sm={2} md={2} lg={2} >
                     <IconButton
                       color='inherit'
                       aria-label='open drawer'
@@ -170,46 +176,60 @@ function WrappedApp (props) {
                     </IconButton>
                   </Grid>
 
-                  <Grid item xl={6} sm={6} md={6} lg={6}>
+                  <Grid item xl={6} xs={7} sm={6} md={6} lg={6}>
                     <Button size='large' className={classes.large} startIcon={<Avatar className={classes.large} src='/logo2.png' />} variant='contained' color='primary' > <Typography variant='h4'> Docudio </Typography> </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
                   </Grid>
-                  <Grid item xl={4} sm={4} md={4} lg={4}>
-                    <DarkModeToggle />
-                  </Grid>
+                  <Hidden xsDown>
+
+                    <Grid item xl={4} xs={false} sm={2} md={2} lg={4}>
+                      <DarkModeToggle />
+                    </Grid>
+                  </Hidden>
+
                 </Grid>
 
               </Toolbar>
             </AppBar>
-            <Drawer
-              variant='persistent'
-              open={open}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              className={classes.drawer}
-            >
-              <div className={classes.toolbar} />
-              <div className={classes.drawerHeader}>
-                <IconButton onClick={handleDrawerClose}>
-                  <ChevronLeftIcon />
-                </IconButton>
-              </div>
-              <PageLinks />
-              <Divider />
-            </Drawer>
-            <main className={classes.content}>
-              <div className={classes.toolbar} />
+            <Grid container direction='row'
+              spacing={1} >
+              <Grid item xl={1} sm={2} md={2} lg={2} >
 
-              <Component {...pageProps} />
-              <Notifier />
+                <Drawer
+                  variant='persistent'
+                  open={open}
+                  classes={{
+                    paper: classes.drawerPaper
+                  }}
+                  className={classes.drawer}
+                >
+                  <div className={classes.toolbar} />
+                  <div className={classes.drawerHeader}>
+                    <IconButton onClick={handleDrawerClose}>
+                      <ChevronLeftIcon />
+                    </IconButton>
+                  </div>
+                  <PageLinks handleDrawerClose={props.width === 'xs' || props.width === 'sm' ? handleDrawerClose : undefined}/>
+                  <Divider />
+                </Drawer>
+              </Grid>
+              <Grid item xl={11} sm={10} md={10} lg={10} >
 
-              <footer className={classes.copyright}>
-                <Box pt={4}>
+                <main className={classes.content}>
+                  <div className={classes.toolbar} />
 
-                  <Copyright />
-                </Box>
-              </footer>
-            </main>
+                  <Component {...pageProps} />
+                  <Notifier />
+
+                  <footer className={classes.copyright}>
+                    <Box pt={4}>
+
+                      <Copyright />
+                    </Box>
+                  </footer>
+                </main>
+              </Grid>
+            </Grid>
+
           </div>
         </SnackbarProvider >
 
@@ -233,8 +253,7 @@ export const makeStore: MakeStore = () => {
 }
 
 export const wrapper = createWrapper(makeStore, { debug: true })
-
-export default wrapper.withRedux(WrappedApp)
+export default withWidth()(wrapper.withRedux(WrappedApp))
 
 // makeStore function that returns a new store for every request
 // apm.setInitialPageLoadName('Docudio Landing Page')

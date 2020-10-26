@@ -1,4 +1,4 @@
-import { getAuthorizationHeader, getAuthToken, setAuthToken, removeAuthToken } from '../utils'
+import { getAuthToken, setAuthToken, removeAuthToken } from '../utils'
 import { call, put } from 'redux-saga/effects'
 import authAgent from '../app/auth-agent'
 import { ACCESS_TOKEN_FAILURE } from '../../actions/auth'
@@ -8,12 +8,12 @@ export default function * apiCaller (request, {
   ...rest
 }) {
   const token = yield call(getAuthToken)
- // const authorizeHeader = yield call(getAuthorizationHeader, token.access_token)
+  // const authorizeHeader = yield call(getAuthorizationHeader, token.access_token)
   const props = {
     ...rest,
     headers: {
-      ...headers,
-   //   ...authorizeHeader,
+      ...headers
+      //   ...authorizeHeader,
     //  token: token.access_token
     }
   }

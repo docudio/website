@@ -35,17 +35,17 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function PageLinks () {
+export default function PageLinks (props) {
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
       <Paper elevation={0}>
         <List aria-label='navigation'>
-          <ListItemLink to='/' primary='Home' icon={<HomeIcon />} />
-          <ListItemLink to='/docs' primary='Docs' icon={<BookIcon />} />
-          <ListItemLink to='/reachout' primary='Talk with Us!' icon={<ChatIcon />} />
-          <CollapsedNavigation heading='Resources' headingIcon={<AppsIcon />} routes={resourceRoutes} />
+          <ListItemLink handleDrawerClose={props.handleDrawerClose} to='/' primary='Home' icon={<HomeIcon />} />
+          <ListItemLink handleDrawerClose={props.handleDrawerClose} to='/docs' primary='Docs' icon={<BookIcon />} />
+          <ListItemLink handleDrawerClose={props.handleDrawerClose} to='/reachout' primary='Talk with Us!' icon={<ChatIcon />} />
+          <CollapsedNavigation handleDrawerClose={props.handleDrawerClose} heading='Resources' headingIcon={<AppsIcon />} routes={resourceRoutes} />
         </List>
       </Paper>
     </div>
@@ -71,6 +71,7 @@ function CollapsedNavigation (props) {
         <List component='div' disablePadding>
           {routes ? routes.map((route, index) =>
             <ListItemLink
+              handleDrawerClose={props.handleDrawerClose}
               key={route.name + index}
               className={classes.nested}
               to={route.path}

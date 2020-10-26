@@ -16,7 +16,7 @@ export default function DarkModeToggle () {
   }
 
   return (
-    <Tooltip style={{ float: 'right', 'align-items': 'center', 'justify-content': 'center', marginTop: '10px' }} title='Toggle Dark Mode Preferences' interactive>
+    <Tooltip style={{ float: 'right', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }} title='Toggle Dark Mode Preferences' interactive>
 
       <Button variant='contained' color='primary' onClick={handleChange} disableElevation><Brightness7Icon/></Button>
     </Tooltip>

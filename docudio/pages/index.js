@@ -61,13 +61,13 @@ export default function Home () {
 
         Awesome product updates; no spam.
         </Typography>
-        <Grid container direction='row'
-          justify='center' spacing={1} >
-          <Grid item justify='center' xl={4} sm={4} md={4} lg={4}>
+        <Grid container justify='center' alignItems='center' direction='row'
+          spacing={1} >
+          <Grid item xl={4} sm={4} md={4} lg={4}>
 
             <TextField id='outlined-basic' onChange={handleEmail} value={email} style={{ 'background-color': submitted == true ? green[200] : '#FFFFFF' }}label={submitted == true ? 'Thank you!' : 'Email'} variant='outlined' />
           </Grid>
-          <Grid item justify='center' xl={2} sm={2} md={2} lg={2}>
+          <Grid item xl={2} sm={2} md={2} lg={2}>
             <Tooltip title='Type your full email' aria-label='add'>
               <span>
 
