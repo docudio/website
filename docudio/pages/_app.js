@@ -24,7 +24,7 @@ import clsx from 'clsx'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
-import PageLinks from '../utils/PageLinks'
+import PageLinks from '../utils/pageLinks'
 import { loadApp } from '../actions'
 import DarkModeToggle from '../utils/DarkModeToggle'
 
