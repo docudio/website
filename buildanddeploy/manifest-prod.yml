@@ -1,0 +1,11 @@
+---
+applications:
+  - name: docudio
+    memory: 200mb
+    instances: 2
+    disk_quota: 500mb
+    path: package/build/
+    stack: cflinuxfs3
+    buildpack: nginx_buildpack
+    routes:
+    - route: docudio.com

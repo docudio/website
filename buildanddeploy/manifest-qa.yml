@@ -1,0 +1,9 @@
+---
+applications:
+  - name: docudio-qa
+    memory: 1G
+    instances: 1
+    disk_quota: 1G
+    path: package/build/
+    stack: cflinuxfs3
+    buildpack: nginx_buildpack

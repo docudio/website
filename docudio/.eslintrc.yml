@@ -1,0 +1,41 @@
+env:
+  browser: true
+  es6: true
+extends:
+  - standard
+  - plugin:compat/recommended
+  - plugin:es/no-2018
+  - plugin:react-hooks/recommended
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parser: babel-eslint
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+    experimentalObjectRestSpread: true
+  ecmaVersion: 2018
+  sourceType: module
+plugins:
+  - react
+  - react-hooks
+  - unused-imports
+  - compat
+  - react-with-styles
+  - es
+rules: {
+  "jsx-quotes" : ["error","prefer-single"], 
+  "react/jsx-uses-react" : "error", 
+ # "max-len" : ['error',{ code: 120,ignorePattern: 'import.*| .*:.*' }], #these ignore import statements as well as the agent.js file example where we have a dictionary of constants that can be long.
+  "react/jsx-uses-vars": "error",
+  "react/jsx-boolean-value": 1,
+  "react-with-styles/no-unused-styles": 1,
+  "react/jsx-curly-brace-presence": [1, { "props": "never", "children": "never" }],
+  "compat/compat": "error",
+  "no-console": 1,
+  "unused-imports/no-unused-imports": 2,
+  "unused-imports/no-unused-vars": 1,
+  "lines-between-class-members": 2,
+  "padding-line-between-statements": ['error',{ blankLine: "always", prev: "function", next: "function" },{ blankLine: "always", prev: "multiline-const", next: "multiline-const" }],
+  "import/newline-after-import": ["error"]
+}

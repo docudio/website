@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var THEME_UPDATE = 'THEME_UPDATE';\nexport var THEME_LIGHT_PREFERRED = 'THEME_LIGHT_PREFERRED';\nexport var THEME_DARK_PREFERRED = 'THEME_DARK_PREFERRED';\nexport var themeUpdate = function themeUpdate(payload) {\n  return {\n    type: THEME_UPDATE,\n    payload: payload\n  };\n};","map":null,"metadata":{},"sourceType":"module"}

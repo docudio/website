@@ -1,0 +1,71 @@
+{
+  "name": "docudio",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@reduxjs/toolkit": "^1.4.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "babel-plugin-file-loader": "^2.0.0",
+    "clsx": "^1.1.1",
+    "next": "^9.5.5",
+    "next-images": "^1.6.0",
+    "next-redux-wrapper": "^6.0.2",
+    "notistack": "^1.0.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.1",
+    "react-scripts": "3.4.3"
+  },
+  "devDependencies": {
+    "@babel/preset-flow": "^7.10.4",
+    "babel-plugin-inline-react-svg": "^1.1.1",
+    "cypress": "^4.12.1",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-compat": "^3.8.0",
+    "eslint-plugin-es": "^3.0.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "eslint-plugin-react-with-styles": "^2.3.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-unused-imports": "^0.1.3",
+    "flow-bin": "^0.132.0",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "start": "next start",
+    "build": "next build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ignore-path .eslintignore .",
+    "flow": "flow",
+    "lintfix": "eslint --ignore-path .eslintignore --fix .",
+    "cachebust": "node ./node_modules/@sparkbox/cachebust",
+    "cacheclean": "node ./node_modules/@sparkbox/cachebust --restore",
+    "cachetest": "npm run cacheclean&& npm run cachebust",
+    "cypress:run": "cypress run"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    "defaults",
+    "not dead",
+    "not Opera > 0",
+    "not Baidu > 0",
+    "not op_mini all",
+    "not ie <= 11"
+  ]
+}

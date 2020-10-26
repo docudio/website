@@ -1,0 +1,1 @@
+{"ast":null,"code":"import common from './common';\nimport auth from './auth';\nimport theme from './theme';\nimport { combineReducers } from 'redux';\nexport default combineReducers({\n  common: common,\n  auth: auth,\n  theme: theme\n});","map":null,"metadata":{},"sourceType":"module"}
