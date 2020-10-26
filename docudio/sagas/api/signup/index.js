@@ -22,6 +22,6 @@ function * submitSignup (action) {
     yield put({ type: SIGNUP_SUCCESS, payload: payload.data })
   } catch (e) {
     yield put({ type: SIGNUP_FAILURE, payload: { message: 'Signup failed, please contact docudio@gmail.com if this persists after refreshing your page' } })
-    yield call(app.sendErrorMessage, e)
+    yield call(app.sendErrorMessage, {message: e})
   }
 }

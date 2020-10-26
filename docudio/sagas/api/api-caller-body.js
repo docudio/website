@@ -6,18 +6,18 @@ export default function * apiCallerBody (request, {
   headers = {},
   ...rest
 }) {
-  const token = yield call(getAuthToken)
+//  const token = yield call(getAuthToken)
   const props = {
     ...rest,
     headers: {
       ...headers,
-      token: token.access_token
+    //  token: token.access_token
     },
     body: JSON.stringify({
       data: {
         ...rest.body.data
       },
-      token: token.access_token,
+   //   token: token.access_token,
       ...rest.body
     }
     )

@@ -8,13 +8,13 @@ export default function * apiCaller (request, {
   ...rest
 }) {
   const token = yield call(getAuthToken)
-  const authorizeHeader = yield call(getAuthorizationHeader, token.access_token)
+ // const authorizeHeader = yield call(getAuthorizationHeader, token.access_token)
   const props = {
     ...rest,
     headers: {
       ...headers,
-      ...authorizeHeader,
-      token: token.access_token
+   //   ...authorizeHeader,
+    //  token: token.access_token
     }
   }
 
