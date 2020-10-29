@@ -27,7 +27,7 @@ function Docs ({ t }) {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title='Welcome to Docudio!' />
+      <CardHeader title={t('cardtitle')} />
       <CardContent>
         <Typography align='center' variant='h3'>
           {t('title')}

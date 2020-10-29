@@ -32,4 +32,8 @@ Error.propTypes = {
   t: PropTypes.func.isRequired
 }
 
+Error.getInitialProps = async () => ({
+  namespacesRequired: ['common']
+})
+
 export default withTranslation('common')(Error)

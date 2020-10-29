@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, makeStyles, Link, CardHeader, CardContent, Typography } from '@material-ui/core'
+import { Card, makeStyles, CardHeader, CardContent, Typography } from '@material-ui/core'
 import { withTranslation } from '../i18n'
 
 const useStyles = makeStyles(theme => ({
@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Reachout ({ t }) {
+function Start ({ t }) {
   const classes = useStyles()
 
   const handleSubmit = () => {
@@ -30,21 +30,18 @@ function Reachout ({ t }) {
       <CardHeader title={t('cardtitle')} />
       <CardContent>
         <Typography align='center' variant='h3'>
-          {t('Slack')}
+          {t('title')}
         </Typography>
-
-        <Link align='center' color='inherit' target='_blank' rel='noreferrer' href='https://join.slack.com/t/docudio/shared_invite/zt-io1hneog-SX2sVVmRTtf2jh7jybvcKA'>
-          <Typography align='center' variant='h5' style={{ marginBottom: '30px' }}>
-            {t('join')}
-          </Typography> </Link>{' '}
-
+        <Typography align='center' variant='h5' style={{ marginBottom: '30px' }}>
+          {t('statement')}
+        </Typography>
       </CardContent>
     </Card>
   )
 }
 
-Reachout.getInitialProps = async () => ({
-  namespacesRequired: ['reachout']
+Start.getInitialProps = async () => ({
+  namespacesRequired: ['start']
 })
 
-export default withTranslation('reachout')(Reachout)
+export default withTranslation('start')(Start)

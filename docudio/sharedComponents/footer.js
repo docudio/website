@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { makeStyles, Link, Typography, Grid, Box, Select, MenuItem, Paper } from '@material-ui/core'
-import { withTranslation, i18n } from '../i18n'
+import { makeStyles, Typography, Grid, Box, Select, MenuItem, Paper } from '@material-ui/core'
+import { withTranslation, i18n, Link } from '../i18n'
 
 import { useDispatch } from 'react-redux'
 import { signupRequested } from '../actions/signup'
@@ -85,6 +85,18 @@ function Footer ({ t }) {
       <Paper style={{ paddingBottom: '20px' }}>
         <Grid container direction='row'
           spacing={1} justify='center' alignItems='center'>
+          <Grid item style={{ paddingLeft: '20px' }} xl={4} sm={4} md={4} lg={4} >
+            <Typography variant='body1'>
+              <Link
+                activeClassName='Mui-selected'
+                href='/downloads/docudio'
+                passHref
+
+              >
+                {t('downloads')}
+              </Link>
+            </Typography>
+          </Grid>
           <Grid item className={classes.copyright} xl={4} sm={4} md={4} lg={4} >
 
             <Box pt={4}>
