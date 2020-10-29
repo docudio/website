@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, makeStyles, Link, CardHeader, CardContent, Typography, Button } from '@material-ui/core'
+import { withTranslation } from '../../i18n'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Home () {
+function Github ({ t }) {
   const classes = useStyles()
 
   const handleSubmit = () => {
@@ -26,19 +27,24 @@ export default function Home () {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title='Welcome to Docudio!' />
+      <CardHeader title={t('cardtitle')} />
       <CardContent>
         <Typography align='center' variant='h3'>
-          Docudio Github
+          {t('title')}
         </Typography>
         <Typography align='center' variant='h5' style={{ marginBottom: '30px' }}>
           <Link align='center' color='inherit' target='_blank' rel='noreferrer' href='https://github.com/docudio'>
-            <Button align='center' color='secondary' variant='contained'> Want to contribute? Visit our Github.  </Button>
+            <Button align='center' color='secondary' variant='contained'> {t('contribute')}  </Button>
           </Link>{' '}
         </Typography>
         <Typography align='center' variant='h5' style={{ marginBottom: '30px' }}>
-Want to be part of the team? email docudio@gmail.com with a resume.    </Typography>
+          {t('statement')}  </Typography>
       </CardContent>
     </Card>
   )
 }
+Github.getInitialProps = async () => ({
+  namespacesRequired: ['github']
+})
+
+export default withTranslation('github')(Github)

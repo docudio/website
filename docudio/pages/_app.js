@@ -1,34 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { MakeStore, createWrapper } from 'next-redux-wrapper'
 import combineReducers from '../reducers/reducer'
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from '../sagas/root-saga'
 import { SnackbarProvider } from 'notistack'
+import Footer from '../sharedComponents/footer'
 import '../utils/index.css'
 import Hidden from '@material-ui/core/Hidden'
 import Notifier from '../utils/Notifier'
 import withWidth from '@material-ui/core/withWidth'
+import { Translation } from 'react-i18next'
+
 // import apm from '../utils/rum'
 import '../utils/App.css'
+import { i18n, appWithTranslation } from '../i18n'
 import Head from 'next/head'
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles'
 import { useSelector, useDispatch } from 'react-redux'
 import Drawer from '@material-ui/core/Drawer'
-import Box from '@material-ui/core/Box'
+
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
-import Link from '@material-ui/core/Link'
+
 import { Grid, IconButton, CssBaseline, Button, Avatar } from '@material-ui/core'
 import clsx from 'clsx'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-
+import App from 'next/app'
 import PageLinks from '../utils/pageLinks'
 import { loadApp } from '../actions'
 import DarkModeToggle from '../utils/DarkModeToggle'
+import { I18nContext } from 'next-i18next'
 
 const drawerWidth = 240
 
@@ -55,7 +60,8 @@ const useStyles = makeStyles(theme => ({
     minHeight: '90vh'
   },
   copyright: {
-    marginTop: 'auto'
+    marginTop: 'auto',
+    paddingBottom: '20px'
   },
   title: {
     flexGrow: 1
@@ -73,19 +79,6 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar
 }))
 
-function Copyright () {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      {'Copyright © '}
-      <Link color='inherit' href='https://www.docudio.com/'>
-        Docudio
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  )
-}
-
 function WrappedApp (props) {
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -95,7 +88,13 @@ function WrappedApp (props) {
       dispatch(loadApp())
     }
   }, [dispatch, appLoaded])
-  const [open, setOpen] = React.useState(props.width != 'xs')
+  console.log(useContext(I18nContext).i18n.language)
+  const [open, setOpen] = React.useState(width != 'xs')
+  const [language, setlanguage] = React.useState(useContext(I18nContext).i18n.language)
+  const handleChange = (event) => {
+    setlanguage(event.target.value)
+    i18n.changeLanguage(event.target.value)
+  }
 
   const handleDrawerOpen = () => {
     if (open === true) {
@@ -109,7 +108,7 @@ function WrappedApp (props) {
     setOpen(false)
   }
 
-  const { Component, pageProps } = props
+  const { Component, pageProps, width } = props
   const ThemePreference = useSelector(state => state.theme.preferred)
   const theme = React.useMemo(
     () =>
@@ -152,7 +151,11 @@ function WrappedApp (props) {
       <ThemeProvider theme={theme}>
         <SnackbarProvider ref={notistackRef} action={(key) => (
           <Button onClick={onClickDismiss(key)}>
-            Dismiss
+            <Translation ns='_app'>
+              {
+                (t, { i18n }) => <p>{t('Dismiss')}</p>
+              }
+            </Translation>
           </Button>
         )}
         maxSnack={3} >
@@ -208,7 +211,7 @@ function WrappedApp (props) {
                       <ChevronLeftIcon />
                     </IconButton>
                   </div>
-                  <PageLinks handleDrawerClose={props.width === 'xs' || props.width === 'sm' ? handleDrawerClose : undefined}/>
+                  <PageLinks handleDrawerClose={width === 'xs' || width === 'sm' ? handleDrawerClose : undefined}/>
                   <Divider />
                 </Drawer>
               </Grid>
@@ -220,13 +223,7 @@ function WrappedApp (props) {
                   <Component {...pageProps} />
                   <Notifier />
 
-                  <footer className={classes.copyright}>
-                    <Box pt={4}>
-
-                      <Copyright />
-                    </Box>
-                  </footer>
-                </main>
+                  <Footer />                </main>
               </Grid>
             </Grid>
 
@@ -253,7 +250,13 @@ export const makeStore: MakeStore = () => {
 }
 
 export const wrapper = createWrapper(makeStore, { debug: true })
-export default withWidth()(wrapper.withRedux(WrappedApp))
+
+WrappedApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext)
+  return { ...appProps, namespacesRequired: ['_app'] }
+}
+
+export default withWidth()(wrapper.withRedux(appWithTranslation(WrappedApp)))
 
 // makeStore function that returns a new store for every request
 // apm.setInitialPageLoadName('Docudio Landing Page')

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, makeStyles, CardHeader, CardContent, Typography } from '@material-ui/core'
+import { withTranslation } from '../i18n'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Home () {
+function Docs ({ t }) {
   const classes = useStyles()
 
   const handleSubmit = () => {
@@ -29,11 +30,18 @@ export default function Home () {
       <CardHeader title='Welcome to Docudio!' />
       <CardContent>
         <Typography align='center' variant='h3'>
-          Docudio Documentation
+          {t('title')}
         </Typography>
         <Typography align='center' variant='h5' style={{ marginBottom: '30px' }}>
-Come back soon for how it works.   </Typography>
+          {t('statement')}
+        </Typography>
       </CardContent>
     </Card>
   )
 }
+
+Docs.getInitialProps = async () => ({
+  namespacesRequired: ['docs']
+})
+
+export default withTranslation('docs')(Docs)

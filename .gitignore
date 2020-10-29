@@ -7,7 +7,8 @@
 
 # testing
 /coverage
-docudio/.next/*
+docudio/.next
+docudio/node_modules
 # production
 /build
 

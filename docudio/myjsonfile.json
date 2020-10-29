@@ -1,0 +1,7 @@
+{
+    "h1": "Ein einfaches Beispiel",
+    "change-locale": "Gebietsschema ändern",
+    "to-second-page": "Zur zweiten Seite",
+    "error-with-status": "Auf dem Del-Server ist ein {{statusCode}} -Fehler aufgetreten",
+    "error-without-status": "Auf dem Server ist ein Fehler aufgetreten"
+}
