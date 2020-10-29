@@ -11,7 +11,7 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
 import PublicIcon from '@material-ui/icons/Public'
 import { withTranslation } from '../i18n'
 import ChatIcon from '@material-ui/icons/Chat'
-
+import CloudIcon from '@material-ui/icons/Cloud';
 import HomeIcon from '@material-ui/icons/Home'
 
 import { Collapse } from '@material-ui/core'
@@ -48,6 +48,7 @@ function PageLinks (props) {
               <ListItemLink handleDrawerClose={props.handleDrawerClose} to='/start' primary={t('Get Started')} icon={<PlayCircleOutlineIcon />} />
               <ListItemLink handleDrawerClose={props.handleDrawerClose} to='/docs' primary={t('Docs')} icon={<BookIcon />} />
               <ListItemLink handleDrawerClose={props.handleDrawerClose} to='/reachout' primary={t('Talk with Us!')} icon={<ChatIcon />} />
+              <ListItemLink handleDrawerClose={props.handleDrawerClose} to='/cloud/as-a-service' primary={t('Cloud')} icon={<CloudIcon />} />
               <CollapsedNavigation handleDrawerClose={props.handleDrawerClose} heading={t('Resources')} headingIcon={<AppsIcon />} routes={resourceRoutes} />
             </List>
           </Paper>

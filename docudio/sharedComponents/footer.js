@@ -85,15 +85,18 @@ function Footer ({ t }) {
       <Paper style={{ paddingBottom: '20px' }}>
         <Grid container direction='row'
           spacing={1} justify='center' alignItems='center'>
-          <Grid item style={{ paddingLeft: '20px' }} xl={4} sm={4} md={4} lg={4} >
-            <Typography variant='body1'>
+          <Grid item style={{ paddingLeft: '20px' }} xl={2} sm={2} md={2} lg={2} >
+            <Typography variant='h5'>
+            Products 
+            </Typography>
+            <Typography style={{paddingLeft: '5px'}} variant='body1'>
               <Link
                 activeClassName='Mui-selected'
-                href='/downloads/docudio'
+                href='/products/docudio'
                 passHref
 
               >
-                {t('downloads')}
+                {t('Docudio')}
               </Link>
             </Typography>
           </Grid>
