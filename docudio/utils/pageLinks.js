@@ -11,7 +11,7 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
 import PublicIcon from '@material-ui/icons/Public'
 import { withTranslation } from '../i18n'
 import ChatIcon from '@material-ui/icons/Chat'
-import CloudIcon from '@material-ui/icons/Cloud';
+import CloudIcon from '@material-ui/icons/Cloud'
 import HomeIcon from '@material-ui/icons/Home'
 
 import { Collapse } from '@material-ui/core'

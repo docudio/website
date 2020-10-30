@@ -87,9 +87,9 @@ function Footer ({ t }) {
           spacing={1} justify='center' alignItems='center'>
           <Grid item style={{ paddingLeft: '20px' }} xl={2} sm={2} md={2} lg={2} >
             <Typography variant='h5'>
-            Products 
+            Products
             </Typography>
-            <Typography style={{paddingLeft: '5px'}} variant='body1'>
+            <Typography style={{ paddingLeft: '5px' }} variant='body1'>
               <Link
                 activeClassName='Mui-selected'
                 href='/products/docudio'
