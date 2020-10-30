@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, makeStyles,Grid, CardHeader,CardActionArea,CardMedia,CardActions,Button, CardContent, Typography } from '@material-ui/core'
+import { Card, makeStyles, Grid, CardHeader, CardActionArea, CardMedia, CardActions, Button, CardContent, Typography } from '@material-ui/core'
 import { withTranslation, Link } from '../../i18n'
 import ShareBlockStandard from '../../sharedComponents/ShareBlockStandard'
 import ShareButtonCircle from '../../sharedComponents/ShareButtonCircle'
@@ -42,7 +42,7 @@ function Examples ({ t, allPosts }) {
     setemail(event.target.value)
   }
   const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1,3)
+  const morePosts = allPosts.slice(1, 3)
   const [submitted, setsubmitted] = React.useState(false)
   const [email, setemail] = React.useState('')
   const shareBlockProps = {
@@ -90,48 +90,48 @@ Share</Typography>
             </div> */ }
           </div>
         </Link>
-                <DocDivider />
+        <DocDivider />
 
-       {/* <Typography align='center' variant='h5' style={{ marginBottom: '30px' }}>
+        {/* <Typography align='center' variant='h5' style={{ marginBottom: '30px' }}>
           {t('statement')} is here        </Typography> */}
-                          <Grid container direction='row'
-                  spacing={4} >
+        <Grid container direction='row'
+          spacing={4} >
 
-         { morePosts.map((item,index) => {
+          { morePosts.map((item, index) => {
             return (
-                                <Grid item xl={4} xs={12} sm={12} md={6} lg={4} >
+              <Grid item xl={4} xs={12} sm={12} md={6} lg={4} >
 
-                  <Card >
-      <CardActionArea>
-        <CardMedia
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="body1" component="h2">
-            <DateFormatter dateString={item.date} />
-          </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
-            {item.title}
-          </Typography>
-          <Typography gutterBottom variant="body2" component="h2">
+                <Card >
+                  <CardActionArea>
+                    <CardMedia
+                      image='/static/images/cards/contemplative-reptile.jpg'
+                      title='Contemplative Reptile'
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant='body1' component='h2'>
+                        <DateFormatter dateString={item.date} />
+                      </Typography>
+                      <Typography gutterBottom variant='h5' component='h2'>
+                        {item.title}
+                      </Typography>
+                      <Typography gutterBottom variant='body2' component='h2'>
             By: {item.author.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {item.excerpt}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
+                      </Typography>
+                      <Typography variant='body2' color='textSecondary' component='p'>
+                        {item.excerpt}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size='small' color='primary'>
           Read More
-        </Button>
-      </CardActions>
-    </Card>    </Grid>
-)
-})
+                    </Button>
+                  </CardActions>
+                </Card>    </Grid>
+            )
+          })
           }
-              </Grid>
+        </Grid>
 
       </CardContent>
     </Card>
