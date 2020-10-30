@@ -1,25 +1,31 @@
 import React from 'react'
-import { Card, makeStyles, Grid, CardHeader, CardActionArea, CardMedia, CardActions, Button, CardContent, Typography } from '@material-ui/core'
-import { withTranslation, Link } from '../../i18n'
+import { Card, makeStyles, CardHeader, Grid, CardActionArea, CardActions, Button, CardContent, Typography } from '@material-ui/core'
+import { withTranslation, Link, Router } from '../../i18n'
 import ShareBlockStandard from '../../sharedComponents/ShareBlockStandard'
 import ShareButtonCircle from '../../sharedComponents/ShareButtonCircle'
 import { getAllPosts } from '../../lib/api'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
+import fs from 'fs'
+
 import TwitterIcon from '@material-ui/icons/Twitter'
 import EmailIcon from '@material-ui/icons/Email'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import DocDivider from '../../utils/DocDivider'
 import DateFormatter from '../../utils/dateFormatter'
 // import Image from '/blogheader.png'; // Import using relative path
+import generateRss from '../../lib/rss'
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(3, 3, 3, 3),
     marginBottom: '10px'
   },
   background: {
     backgroundColor: '#a0a0a0'
+  },
+  float: {
+    float: 'right'
   },
   paperContainer: {
     backgroundSize: 'contain',
@@ -46,7 +52,7 @@ function Examples ({ t, allPosts }) {
   const [submitted, setsubmitted] = React.useState(false)
   const [email, setemail] = React.useState('')
   const shareBlockProps = {
-    url: 'https://www.docudio.com/blog/welcome-to-docudio',
+    url: 'https://www.docudio.com/blog/' + heroPost.slug,
     button: ShareButtonCircle,
     buttons: [
       { network: 'Twitter', icon: TwitterIcon },
@@ -60,15 +66,19 @@ function Examples ({ t, allPosts }) {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title={t('cardtitle')} />
+      {/*   <CardHeader title={t('cardtitle')} /> */}
+      <CardHeader action={ <Button onClick={() => Router.push('/rss.xml')} ariant='outlined' style={{ float: 'right' }} color='primary'>
+         RSS </Button> }/>
+
       <CardContent>
-        <Typography align='center' variant='h3'>
+
+        {/*    <Typography align='center' variant='h3'>
           {t('title')}
-        </Typography>
+        </Typography> */}
         <DocDivider />
         <Link
           activeClassName='Mui-selected'
-          href='/blog/welcome-to-docudio'
+          href={`/blog/${heroPost.slug}`}
           passHref
 
         >
@@ -80,7 +90,7 @@ function Examples ({ t, allPosts }) {
             <Typography variant='h4' style={{ marginBottom: '30px' }}>
               {heroPost.title}</Typography>
             <Typography variant='body1' style={{ marginBottom: '30px' }}>
-BY: {heroPost.author.name}</Typography>
+By: {heroPost.author.name}</Typography>
             <Typography variant='body1' >
 Share</Typography>
             <ShareBlockStandard left noColor {...shareBlockProps} />
@@ -103,10 +113,6 @@ Share</Typography>
 
                 <Card >
                   <CardActionArea>
-                    <CardMedia
-                      image='/static/images/cards/contemplative-reptile.jpg'
-                      title='Contemplative Reptile'
-                    />
                     <CardContent>
                       <Typography gutterBottom variant='body1' component='h2'>
                         <DateFormatter dateString={item.date} />
@@ -123,9 +129,17 @@ Share</Typography>
                     </CardContent>
                   </CardActionArea>
                   <CardActions>
-                    <Button size='small' color='primary'>
+                    <Link
+                      activeClassName='Mui-selected'
+                      href={`/blog/${item.slug}`}
+                      passHref
+
+                    >
+
+                      <Button size='small' color='primary'>
           Read More
-                    </Button>
+                      </Button>
+                    </Link>
                   </CardActions>
                 </Card>    </Grid>
             )
@@ -148,6 +162,8 @@ export async function getStaticProps () {
     'coverImage',
     'excerpt'
   ])
+  const rss = generateRss(allPosts)
+  fs.writeFileSync('./public/rss.xml', rss)
 
   return {
     props: { allPosts }
