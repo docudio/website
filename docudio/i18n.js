@@ -3,15 +3,18 @@ const NextI18Next = require('next-i18next').default
 const path = require('path')
 
 module.exports = new NextI18Next({
-  otherLanguages: ['de', 'jp', 'cn', 'es', 'fr', 'kr', 'pt'],
+  otherLanguages: ['de', 'ja', 'zh-CN', 'es', 'fr', 'ko', 'pt', 'en'],
+  locales: ['de', 'ja', 'zh-CN', 'es', 'fr', 'ko', 'pt', 'en'],
+  defaultLanguage: 'en',
+  ignoreRoutes: ['/_next/', '/static/', '/public/', '/api/','/blog'],
   localeSubpaths: {
     de: 'de',
-    cn: 'cn',
+    'zh-CN': 'cn',
     es: 'es',
     fr: 'fr',
-    jp: 'jp',
-    kr: 'kr',
+    ja: 'jp',
+    ko: 'kr',
     pt: 'pt'
   },
   localePath: path.resolve('./public/static/locales')
-})
+}), { i18n: { locales: ['de', 'ja', 'zh-CN', 'es', 'fr', 'ko', 'pt', 'en'] } }

@@ -17,7 +17,7 @@ const AUTH_PARMS = {
   response_type: 'code',
   scope: ''
 }
-console.log(process.env)
+
 const Signup = {
   submitSignup: (options) => requests.postprops(`${NGINX_API_ROOT}${USER_ROOT}signup`, options)
 }

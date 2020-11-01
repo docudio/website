@@ -26,7 +26,7 @@ class ShareButton extends React.PureComponent {
         className={`${className}`}
         aria-label={`Share on ${network}`}
         onClick={this.onClick}
-        style={{ 'border-radius': '50%' }}
+        style={{ borderRadius: '50%' }}
 
       >
         {children}

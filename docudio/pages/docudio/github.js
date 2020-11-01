@@ -13,17 +13,6 @@ const useStyles = makeStyles(theme => ({
 function Github ({ t }) {
   const classes = useStyles()
 
-  const handleSubmit = () => {
-    setsubmitted(!submitted)
-    setemail('')
-  }
-
-  const handleEmail = (event) => {
-    setemail(event.target.value)
-  }
-
-  const [submitted, setsubmitted] = React.useState(false)
-  const [email, setemail] = React.useState('')
 
   return (
     <Card className={classes.root}>

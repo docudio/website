@@ -41,7 +41,7 @@ function PageLinks (props) {
   return (
     <div className={classes.root}>
       <Translation ns='pagelinks'>
-        {(t, { i18n }) =>
+        {(t) =>
           <Paper elevation={0}>
             <List aria-label='navigation'>
               <ListItemLink handleDrawerClose={props.handleDrawerClose} to='/' primary={t('Home')} icon={<HomeIcon />} />
@@ -70,7 +70,7 @@ function CollapsedNavigation (props) {
   return (
     <>
       <Translation ns='pagelinks'>
-        {(t, { i18n }) =>
+        {(t) =>
           <>
             <ListItem button onClick={handleClick}>
               {headingIcon ? <ListItemIcon>{headingIcon}</ListItemIcon> : null}

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
-
+import { i18n, withTranslation } from '../../i18n'
 import React from 'react'
 import { makeStyles, Typography } from '@material-ui/core'
 
@@ -26,7 +26,11 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '10px'
   },
   background: {
-    backgroundColor: '#a0a0a0'
+    backgroundColor: '#a0a0a0',
+    padding: theme.spacing(3, 3, 3, 3)
+  },
+  postbody: {
+    padding: theme.spacing(3, 3, 3, 3)
   },
   paperContainer: {
     backgroundSize: 'contain',
@@ -37,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-export default function Post ({ post, morePosts, preview }) {
+function Post ({ post, morePosts, preview }) {
   const router = useRouter()
   const classes = useStyles()
 
@@ -89,15 +93,19 @@ Share</Typography>
           {post.title} | Next.js Blog Example
         </title>
         <meta property='og:image' content={post.ogImage.url} />
+                <div className={classes.postbody}>
+
         <PostBody content={post.content} />
+                </div>
+
       </article>
     </>
 
   )
 }
 
-export async function getStaticProps ({ params }) {
-  const post = getPostBySlug(params.slug, [
+export async function getStaticProps ({ params, locale }) {
+  const post = getPostBySlug(locale, params.slug, [
     'title',
     'date',
     'slug',
@@ -113,22 +121,39 @@ export async function getStaticProps ({ params }) {
       post: {
         ...post,
         content
-      }
+      },
     }
   }
 }
 
 export async function getStaticPaths () {
-  const posts = getAllPosts(['slug'])
-
-  return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          slug: post.slug
+  const locales = ['en', 'zh-CN', 'de', 'es', 'fr', 'jp', 'ko', 'pt']
+  const finalpaths = []
+  locales.map((locale) => {
+    const posts = getAllPosts(locale, ['slug'])
+    const allPostsinLocale = posts.map((post) => {
+      if (locale == 'en') {
+        return {
+          params: {
+            slug: post.slug
+          },
+          locale: 'en'
+        }
+      } else {
+        return {
+          params: {
+            slug: post.slug
+          },
+          locale: locale
         }
       }
-    }),
+    })
+    finalpaths.push(...allPostsinLocale)
+  })
+  return {
+    paths: finalpaths,
     fallback: false
   }
 }
+
+export default (Post)

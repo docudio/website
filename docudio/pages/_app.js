@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import { MakeStore, createWrapper } from 'next-redux-wrapper'
 import combineReducers from '../reducers/reducer'
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -11,7 +11,7 @@ import Hidden from '@material-ui/core/Hidden'
 import Notifier from '../utils/Notifier'
 import withWidth from '@material-ui/core/withWidth'
 import { Translation } from 'react-i18next'
-
+import { useRouter } from 'next/router'
 // import apm from '../utils/rum'
 import '../utils/App.css'
 import { i18n, appWithTranslation } from '../i18n'
@@ -33,7 +33,6 @@ import App from 'next/app'
 import PageLinks from '../utils/pageLinks'
 import { loadApp } from '../actions'
 import DarkModeToggle from '../utils/DarkModeToggle'
-import { I18nContext } from 'next-i18next'
 
 const drawerWidth = 240
 
@@ -83,18 +82,15 @@ function WrappedApp (props) {
   const classes = useStyles()
   const dispatch = useDispatch()
   const appLoaded = true
+  const router = useRouter()
   useEffect(() => {
     if (!appLoaded) {
       dispatch(loadApp())
     }
+    i18n.changeLanguage(router.locale)
   }, [dispatch, appLoaded])
-  console.log(useContext(I18nContext).i18n.language)
-  const [open, setOpen] = React.useState(width != 'xs')
-  const [language, setlanguage] = React.useState(useContext(I18nContext).i18n.language)
-  const handleChange = (event) => {
-    setlanguage(event.target.value)
-    i18n.changeLanguage(event.target.value)
-  }
+  const { Component, pageProps, width } = props
+  const [open, setOpen] = React.useState(!(width == 'xs' || width == 'sm'))
 
   const handleDrawerOpen = () => {
     if (open === true) {
@@ -108,7 +104,6 @@ function WrappedApp (props) {
     setOpen(false)
   }
 
-  const { Component, pageProps, width } = props
   const ThemePreference = useSelector(state => state.theme.preferred)
   const theme = React.useMemo(
     () =>

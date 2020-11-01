@@ -5,31 +5,15 @@
       <link>https://docudio.com/blog</link>
       <description>Docudio's home page and blog. </description>
       <language>en</language>
-      <lastBuildDate>Wed, 18 Mar 2020 05:35:07 GMT</lastBuildDate>
+      <lastBuildDate>Sun, 01 Nov 2020 12:00:00 GMT</lastBuildDate>
       <atom:link href="https://docudio.com/rss.xml" rel="self" type="application/rss+xml"/>
       
   <item>
-    <guid>https://docudio.com/join-docudio</guid>
-    <title>Join Docudio</title>
-    <link>https://docudio.com/blog/join-docudio</link>
-    <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.</description>
-    <pubDate>Wed, 18 Mar 2020 05:35:07 GMT</pubDate>
-  </item>
-
-  <item>
-    <guid>https://docudio.com/why-docudio</guid>
-    <title>Why Docudio</title>
-    <link>https://docudio.com/blog/why-docudio</link>
-    <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.</description>
-    <pubDate>Tue, 17 Mar 2020 05:35:07 GMT</pubDate>
-  </item>
-
-  <item>
     <guid>https://docudio.com/welcome-to-docudio</guid>
-    <title>Dynamic Routing and Static Generation</title>
+    <title>Welcome to Docudio</title>
     <link>https://docudio.com/blog/welcome-to-docudio</link>
-    <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.</description>
-    <pubDate>Mon, 16 Mar 2020 05:35:07 GMT</pubDate>
+    <description>A short post welcoming people to the Docudio blog, and what we intend to share here in the future.</description>
+    <pubDate>Sun, 01 Nov 2020 12:00:00 GMT</pubDate>
   </item>
 
     </channel>

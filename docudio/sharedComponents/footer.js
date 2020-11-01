@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { makeStyles, Typography, Grid, Box, Select, MenuItem, Paper } from '@material-ui/core'
 import { withTranslation, i18n, Link } from '../i18n'
+import { useRouter } from 'next/router'
 
 import { useDispatch } from 'react-redux'
 import { signupRequested } from '../actions/signup'
-
-import { I18nContext } from 'next-i18next'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,6 +63,7 @@ function Copyright (props) {
 function Footer ({ t }) {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const handleSubmit = () => {
     setsubmitted(!submitted)
@@ -71,10 +71,12 @@ function Footer ({ t }) {
     setemail('')
   }
 
-  const [language, setlanguage] = React.useState(useContext(I18nContext).i18n.language)
+  const [language, setlanguage] = React.useState(router.locale)
   const handleChange = (event) => {
     setlanguage(event.target.value)
     i18n.changeLanguage(event.target.value)
+    const searchParams = new URLSearchParams(router.query)
+    router.push(router.pathname + '?' + searchParams.toString(), undefined, { locale: event.target.value })
   }
 
   const [submitted, setsubmitted] = React.useState(false)
