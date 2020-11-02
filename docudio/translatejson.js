@@ -42,7 +42,7 @@ files.forEach(function (element) {
     })
   var output = TJO.translate(example, 'zh-CN')
     .then(function (data) {
-      fs.writeFile(`./public/static/locales/cn/${element}`, JSON.stringify(data, null, 4), function (err, result) {
+      fs.writeFile(`./public/static/locales/zh-CN/${element}`, JSON.stringify(data, null, 4), function (err, result) {
         if (err) console.log('error', err)
       })
     }).catch(function (err) {
@@ -50,7 +50,7 @@ files.forEach(function (element) {
     })
   var output = TJO.translate(example, 'ko')
     .then(function (data) {
-      fs.writeFile(`./public/static/locales/kr/${element}`, JSON.stringify(data, null, 4), function (err, result) {
+      fs.writeFile(`./public/static/locales/ko/${element}`, JSON.stringify(data, null, 4), function (err, result) {
         if (err) console.log('error', err)
       })
     }).catch(function (err) {
@@ -58,7 +58,7 @@ files.forEach(function (element) {
     })
   var output = TJO.translate(example, 'ja')
     .then(function (data) {
-      fs.writeFile(`./public/static/locales/jp/${element}`, JSON.stringify(data, null, 4), function (err, result) {
+      fs.writeFile(`./public/static/locales/ja/${element}`, JSON.stringify(data, null, 4), function (err, result) {
         if (err) console.log('error', err)
       })
     }).catch(function (err) {

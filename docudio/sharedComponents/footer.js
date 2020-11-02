@@ -124,9 +124,9 @@ function Footer ({ t }) {
                 <MenuItem value='de'>Deutsch</MenuItem>
                 <MenuItem value='es'>español</MenuItem>
                 <MenuItem value='fr'>français</MenuItem>
-                <MenuItem value='jp'>日本語</MenuItem>
-                <MenuItem value='kr'>한국어</MenuItem>
-                <MenuItem value='cn'>简体中文</MenuItem>
+                <MenuItem value='ja'>日本語</MenuItem>
+                <MenuItem value='ko'>한국어</MenuItem>
+                <MenuItem value='zh-CN'>简体中文</MenuItem>
                 <MenuItem value='pt'>Português</MenuItem>
               </Select>
             </Box>

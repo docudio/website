@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 export default function blogIndex ({ posts }) {
   const classes = useStyles()
 
-    const router = useRouter()
+  const router = useRouter()
 
   const heroPost = posts[0]
   const morePosts = posts.slice(1, 3)
@@ -171,8 +171,6 @@ export async function getStaticProps ({ params, locale }) {
   fs.writeFileSync('./public/rss.xml', rss)
 
   return {
-    props: { posts: allPosts
-     }
+    props: { posts: allPosts }
   }
 }
-

@@ -13,7 +13,6 @@ const useStyles = makeStyles(theme => ({
 function Github ({ t }) {
   const classes = useStyles()
 
-
   return (
     <Card className={classes.root}>
       <CardHeader title={t('cardtitle')} />
