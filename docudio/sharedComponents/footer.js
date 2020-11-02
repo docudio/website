@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, Typography, Grid, Box, Select, MenuItem, Paper } from '@material-ui/core'
-import { withTranslation, i18n, Link } from '../i18n'
+import { withTranslation, Link } from '../i18n'
 import { useRouter } from 'next/router'
 
 import { useDispatch } from 'react-redux'
@@ -74,7 +74,7 @@ function Footer ({ t }) {
   const [language, setlanguage] = React.useState(router.locale)
   const handleChange = (event) => {
     setlanguage(event.target.value)
-    i18n.changeLanguage(event.target.value)
+    //  i18n.changeLanguage(event.target.value)
     const searchParams = new URLSearchParams(router.query)
     router.push(router.pathname + '?' + searchParams.toString(), undefined, { locale: event.target.value })
   }

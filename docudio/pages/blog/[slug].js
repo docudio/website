@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
-import { i18n, Link } from '../../i18n'
+import { Link } from '../../i18n'
 import React from 'react'
 import { makeStyles, Grid, Button, Typography } from '@material-ui/core'
 
@@ -60,9 +60,12 @@ function Post ({ post, morePosts, preview }) {
   }
 
   const handleChange = (event) => {
-    i18n.changeLanguage(event)
+    console.log(event)
+    console.log(router.locale)
+    console.log(router.pathname)
     const searchParams = new URLSearchParams(router.query)
     router.push(router.pathname + '?' + searchParams.toString(), undefined, { locale: event })
+    // i18n.changeLanguage(event)
   }
 
   const buttons = [{ language: 'en', text: 'English' },
@@ -71,7 +74,7 @@ function Post ({ post, morePosts, preview }) {
     { language: 'fr', text: 'français' },
     { language: 'ja', text: '日本語' },
     { language: 'ko', text: '한국어' },
-    { language: 'zh-CH', text: '简体中文' },
+    { language: 'zh-CN', text: '简体中文' },
     { language: 'pt', text: 'Português' }
   ]
   return (
@@ -103,6 +106,7 @@ Language</Typography>
                 <Grid item xl='auto' xs='auto' sm='auto' md='auto' lg='auto' >
                   <Button
                     variant='outlined'
+                    size='small'
                     style={{ marginRight: '5px' }}
                     key={language}
                     language={language}

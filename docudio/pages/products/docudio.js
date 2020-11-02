@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, makeStyles, CardHeader, CardContent, Typography } from '@material-ui/core'
 import { withTranslation } from '../../i18n'
 import Link from 'next/link'
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -24,15 +25,15 @@ function DocudioProduct ({ t }) {
           {t('statement')}
         </Typography>
         <Typography variant='body1'>
-  <Link
-    activeClassName='Mui-selected'
-    href='/downloads/docudio'
-    passHref
+          <Link
+            activeClassName='Mui-selected'
+            href='/downloads/docudio'
+            passHref
 
-  >
-    {t('downloads')}
-  </Link>
-</Typography>
+          >
+            {t('downloads')}
+          </Link>
+        </Typography>
 
       </CardContent>
     </Card>

@@ -60,7 +60,7 @@ export default function blogIndex ({ posts }) {
   return (
     <Card className={classes.root}>
       {/*   <CardHeader title={t('cardtitle')} /> */}
-      <CardHeader action={ <Button onClick={() => Router.push('/rss.xml')} ariant='outlined' style={{ float: 'right' }} color='primary'>
+      <CardHeader action={ <Button onClick={() => router.push('/rss.xml')} ariant='outlined' style={{ float: 'right' }} color='primary'>
          RSS </Button> }/>
 
       <CardContent>

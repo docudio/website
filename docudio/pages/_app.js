@@ -87,8 +87,10 @@ function WrappedApp (props) {
     if (!appLoaded) {
       dispatch(loadApp())
     }
-    i18n.changeLanguage(router.locale)
-  }, [dispatch, appLoaded])
+    if (i18n.language !== router.locale) {
+      i18n.changeLanguage(router.locale)
+    }
+  }, [dispatch, appLoaded, router])
   const { Component, pageProps, width } = props
   const [open, setOpen] = React.useState(!(width == 'xs' || width == 'sm'))
 
