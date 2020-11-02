@@ -175,10 +175,20 @@ function WrappedApp (props) {
                       <MenuIcon />
                     </IconButton>
                   </Grid>
+                  <Hidden smDown>
 
-                  <Grid item xl={6} xs={7} sm={6} md={6} lg={6}>
-                    <Button size='large' className={classes.large} startIcon={<Avatar className={classes.large} src='/logo2.png' />} variant='contained' color='primary' > <Typography variant='h4'> Docudio </Typography> </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
-                  </Grid>
+                    <Grid item xl={6} xs={7} sm={6} md={6} lg={6}>
+                      <Button size='large' className={classes.large} startIcon={<Avatar className={classes.large} src='/logo2.png' />} variant='contained' color='primary' > <Typography variant='h4'> Docudio </Typography> </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
+                    </Grid>
+                  </Hidden>
+
+                  <Hidden mdUp>
+
+                    <Grid item xl={6} xs={7} sm={6} md={6} lg={6}>
+                      <Typography variant='h4' className={classes.large} style={{ verticalAlign: 'middle' }}> DOCUDIO </Typography>     {/*  <LegacysiteLink /><LoginButton /> */}
+                    </Grid>
+                  </Hidden>
+
                   <Hidden xsDown>
 
                     <Grid item xl={4} xs={false} sm={2} md={2} lg={4}>

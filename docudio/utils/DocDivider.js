@@ -12,6 +12,6 @@ const useStyles = makeStyles(theme => ({
 export default function DocDivider () {
   const classes = useStyles()
   return (
-    <Divider className={classes.divider} variant='rect' height='100%'/>
+    <Divider className={classes.divider} variant='fullWidth' height='100%'/>
   )
 }

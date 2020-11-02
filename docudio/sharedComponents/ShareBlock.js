@@ -25,7 +25,7 @@ const ShareBlock = props => {
         const rest = { ...blockRest, ...buttonRest }
 
         return (
-          <Grid item xl='auto' xs='auto' sm='auto' md='auto' lg='auto' >
+          <Grid item xl='auto' xs='3' sm='3' md='auto' lg='auto' >
             <Button
               key={network}
               network={network}

@@ -97,17 +97,17 @@ function Post ({ post, morePosts, preview }) {
 Language</Typography>
 
           <Grid container direction='row'
-            spacing={0} >
+            spacing={1} >
 
             {buttons.map(button => {
               const { language, text } = button
 
               return (
-                <Grid item xl='auto' xs='auto' sm='auto' md='auto' lg='auto' >
+                <Grid item xl='auto' xs={3} sm={3} md='auto' lg='auto' >
                   <Button
                     variant='outlined'
                     size='small'
-                    style={{ marginRight: '5px' }}
+                    style={{ marginRight: '5px', marginTop: '5px' }}
                     key={language}
                     language={language}
                     onClick={() => { handleChange(language) }}
