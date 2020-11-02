@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var SIGNUP_REQUESTED = 'SIGNUP_REQUESTED';\nexport var SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';\nexport var SIGNUP_FAILURE = 'SIGNUP_FAILURE';\nexport var signupRequested = function signupRequested(payload) {\n  return {\n    type: SIGNUP_REQUESTED,\n    payload: payload\n  };\n};","map":null,"metadata":{},"sourceType":"module"}
