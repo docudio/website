@@ -13,7 +13,7 @@ import EmailIcon from '@material-ui/icons/Email'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import DocDivider from '../../utils/DocDivider'
 import DateFormatter from '../../utils/dateFormatter'
-import PostBody from '../../utils/PostBody'
+import PostBody from '../../utils/postBody'
 
 // import Image from '/blogheader.png'; // Import using relative path
 
