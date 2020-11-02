@@ -5,25 +5,31 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from '../sagas/root-saga'
 import { SnackbarProvider } from 'notistack'
+import Footer from '../sharedComponents/footer'
 import '../utils/index.css'
+import Hidden from '@material-ui/core/Hidden'
 import Notifier from '../utils/Notifier'
+import withWidth from '@material-ui/core/withWidth'
+import { Translation } from 'react-i18next'
+import { useRouter } from 'next/router'
 // import apm from '../utils/rum'
 import '../utils/App.css'
+import { i18n, appWithTranslation } from '../i18n'
 import Head from 'next/head'
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles'
 import { useSelector, useDispatch } from 'react-redux'
 import Drawer from '@material-ui/core/Drawer'
-import Box from '@material-ui/core/Box'
+
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
-import Link from '@material-ui/core/Link'
+
 import { Grid, IconButton, CssBaseline, Button, Avatar } from '@material-ui/core'
 import clsx from 'clsx'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-
+import App from 'next/app'
 import PageLinks from '../utils/pageLinks'
 import { loadApp } from '../actions'
 import DarkModeToggle from '../utils/DarkModeToggle'
@@ -38,11 +44,11 @@ const useStyles = makeStyles(theme => ({
     zIndex: theme.zIndex.drawer + 1
   },
   drawer: {
-    width: drawerWidth,
+  //  width: drawerWidth,
     flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth
+    // width: drawerWidth
   },
   content: {
     flexGrow: 1
@@ -53,7 +59,8 @@ const useStyles = makeStyles(theme => ({
     minHeight: '90vh'
   },
   copyright: {
-    marginTop: 'auto'
+    marginTop: 'auto',
+    paddingBottom: '20px'
   },
   title: {
     flexGrow: 1
@@ -71,39 +78,32 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar
 }))
 
-function Copyright () {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      {'Copyright © '}
-      <Link color='inherit' href='https://www.docudio.com/'>
-        Docudio
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  )
-}
-
 function WrappedApp (props) {
   const classes = useStyles()
   const dispatch = useDispatch()
   const appLoaded = true
+  const router = useRouter()
   useEffect(() => {
     if (!appLoaded) {
       dispatch(loadApp())
     }
+    i18n.changeLanguage(router.locale)
   }, [dispatch, appLoaded])
-  const [open, setOpen] = React.useState(true)
+  const { Component, pageProps, width } = props
+  const [open, setOpen] = React.useState(!(width == 'xs' || width == 'sm'))
 
   const handleDrawerOpen = () => {
-    setOpen(true)
+    if (open === true) {
+      setOpen(false)
+    } else {
+      setOpen(true)
+    }
   }
 
   const handleDrawerClose = () => {
     setOpen(false)
   }
 
-  const { Component, pageProps } = props
   const ThemePreference = useSelector(state => state.theme.preferred)
   const theme = React.useMemo(
     () =>
@@ -146,7 +146,11 @@ function WrappedApp (props) {
       <ThemeProvider theme={theme}>
         <SnackbarProvider ref={notistackRef} action={(key) => (
           <Button onClick={onClickDismiss(key)}>
-            Dismiss
+            <Translation ns='_app'>
+              {
+                (t, { i18n }) => <p>{t('Dismiss')}</p>
+              }
+            </Translation>
           </Button>
         )}
         maxSnack={3} >
@@ -158,7 +162,7 @@ function WrappedApp (props) {
 
                 <Grid container direction='row'
                   spacing={4} >
-                  <Grid item xl={2} sm={2} md={2} lg={2} >
+                  <Grid item xl={2} xs={4} sm={2} md={2} lg={2} >
                     <IconButton
                       color='inherit'
                       aria-label='open drawer'
@@ -170,46 +174,54 @@ function WrappedApp (props) {
                     </IconButton>
                   </Grid>
 
-                  <Grid item xl={6} sm={6} md={6} lg={6}>
+                  <Grid item xl={6} xs={7} sm={6} md={6} lg={6}>
                     <Button size='large' className={classes.large} startIcon={<Avatar className={classes.large} src='/logo2.png' />} variant='contained' color='primary' > <Typography variant='h4'> Docudio </Typography> </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
                   </Grid>
-                  <Grid item xl={4} sm={4} md={4} lg={4}>
-                    <DarkModeToggle />
-                  </Grid>
+                  <Hidden xsDown>
+
+                    <Grid item xl={4} xs={false} sm={2} md={2} lg={4}>
+                      <DarkModeToggle />
+                    </Grid>
+                  </Hidden>
+
                 </Grid>
 
               </Toolbar>
             </AppBar>
-            <Drawer
-              variant='persistent'
-              open={open}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              className={classes.drawer}
-            >
-              <div className={classes.toolbar} />
-              <div className={classes.drawerHeader}>
-                <IconButton onClick={handleDrawerClose}>
-                  <ChevronLeftIcon />
-                </IconButton>
-              </div>
-              <PageLinks />
-              <Divider />
-            </Drawer>
-            <main className={classes.content}>
-              <div className={classes.toolbar} />
+            <Grid container direction='row'
+              spacing={1} >
+              <Grid item xl={1} sm={2} md={2} lg={2} >
 
-              <Component {...pageProps} />
-              <Notifier />
+                <Drawer
+                  variant='persistent'
+                  open={open}
+                  classes={{
+                    paper: classes.drawerPaper
+                  }}
+                  className={classes.drawer}
+                >
+                  <div className={classes.toolbar} />
+                  <div className={classes.drawerHeader}>
+                    <IconButton onClick={handleDrawerClose}>
+                      <ChevronLeftIcon />
+                    </IconButton>
+                  </div>
+                  <PageLinks handleDrawerClose={width === 'xs' || width === 'sm' ? handleDrawerClose : undefined}/>
+                  <Divider />
+                </Drawer>
+              </Grid>
+              <Grid item xl={11} sm={10} md={10} lg={10} >
 
-              <footer className={classes.copyright}>
-                <Box pt={4}>
+                <main className={classes.content}>
+                  <div className={classes.toolbar} />
 
-                  <Copyright />
-                </Box>
-              </footer>
-            </main>
+                  <Component {...pageProps} />
+                  <Notifier />
+
+                  <Footer />                </main>
+              </Grid>
+            </Grid>
+
           </div>
         </SnackbarProvider >
 
@@ -234,7 +246,12 @@ export const makeStore: MakeStore = () => {
 
 export const wrapper = createWrapper(makeStore, { debug: true })
 
-export default wrapper.withRedux(WrappedApp)
+WrappedApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext)
+  return { ...appProps, namespacesRequired: ['_app'] }
+}
+
+export default withWidth()(wrapper.withRedux(appWithTranslation(WrappedApp)))
 
 // makeStore function that returns a new store for every request
 // apm.setInitialPageLoadName('Docudio Landing Page')

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, makeStyles, Link, CardHeader, CardContent, Typography, Button, Grid, TextField, Tooltip } from '@material-ui/core'
-
+import { withTranslation } from '../i18n'
 import DocDivider from '../utils/DocDivider'
 import green from '@material-ui/core/colors/green'
 import { useDispatch } from 'react-redux'
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Home () {
+function Home ({ t }) {
   const classes = useStyles()
   const dispatch = useDispatch()
 
@@ -33,45 +33,45 @@ export default function Home () {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title='Welcome to Docudio!' />
+      <CardHeader title= {t('welcome')} />
       <CardContent>
         <Typography align='center' variant='h3'>
-          Open Source Documentation Studio
+          {t('title')}
         </Typography>
         <Typography align='center' variant='h5' style={{ marginBottom: '30px' }}>
-          A single source of Truth for everybody, from CIO to Systems Engineer, made by Developers
+          {t('slogan')}
         </Typography>
         <Typography align='center' variant='body1' style={{ marginBottom: '30px' }}>
-                  We are Seeking Funds, and Looking for Developers to help build the best Documentation Studio.
+          {t('funds')}
         </Typography>
         <Typography align='center' variant='body2' style={{ marginBottom: '30px' }}>
           <Link color='inherit' target='_blank' rel='noreferrer' href='https://kickstarter.com/projects/253692047/docudio-an-enterpise-it-documentation-studio-for-all'>
-            <Button color='secondary' variant='contained'> Checkout our Kickstarter </Button>
+            <Button color='secondary' variant='contained'> {t('kickstarter')} </Button>
           </Link>{' '}
 
           <Link color='inherit' target='_blank' rel='noreferrer' href='https://github.com/docudio'>
-            <Button color='secondary' variant='contained'> Start Contributing! </Button>
+            <Button color='secondary' variant='contained'> {t('contribute')} </Button>
           </Link>{' '}
         </Typography>
         <DocDivider />
         <Typography align='center' variant='h3' style={{ marginBottom: '30px' }}>
-          Sign up for Docudio Releases and Updates
+          {t('signup')}
         </Typography>
         <Typography align='center' variant='body1' style={{ marginBottom: '30px' }}>
 
-        Awesome product updates; no spam.
+          {t('note')}
         </Typography>
-        <Grid container direction='row'
-          justify='center' spacing={1} >
-          <Grid item justify='center' xl={4} sm={4} md={4} lg={4}>
+        <Grid container justify='center' alignItems='center' direction='row'
+          spacing={1} >
+          <Grid item xl={4} sm={4} md={4} lg={4}>
 
-            <TextField id='outlined-basic' onChange={handleEmail} value={email} style={{ 'background-color': submitted == true ? green[200] : '#FFFFFF' }}label={submitted == true ? 'Thank you!' : 'Email'} variant='outlined' />
+            <TextField id='outlined-basic' onChange={handleEmail} value={email} style={{ backgroundColor: submitted == true ? green[200] : '#FFFFFF' }}label={submitted == true ? t('thankyou') : t('email')} variant='outlined' />
           </Grid>
-          <Grid item justify='center' xl={2} sm={2} md={2} lg={2}>
-            <Tooltip title='Type your full email' aria-label='add'>
+          <Grid item xl={2} sm={2} md={2} lg={2}>
+            <Tooltip title={t('tooltip')} aria-label='add'>
               <span>
 
-                <Button disabled={!(email.length > 3 && email.includes('@'))} color='secondary' variant='contained' onClick={handleSubmit}> Submit </Button>
+                <Button disabled={!(email.length > 3 && email.includes('@'))} color='secondary' variant='contained' onClick={handleSubmit}> {t('submit')} </Button>
               </span>
             </Tooltip>
           </Grid>
@@ -80,3 +80,8 @@ export default function Home () {
       </CardContent>
     </Card>)
 }
+
+Home.getInitialProps = async () => ({
+  namespacesRequired: ['index']
+})
+export default withTranslation('index')(Home)

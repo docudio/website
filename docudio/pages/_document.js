@@ -10,6 +10,12 @@ export default class MyDocument extends Document {
           {/* PWA primary color */}
           <meta name='theme-color' content='#000000' />
           <link
+            rel='alternate'
+            type='application/rss+xml'
+            title='RSS feed for blog posts'
+            href='https://docudio.com/rss.xml'
+          />
+          <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
           />

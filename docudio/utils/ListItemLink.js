@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction } from '@material-ui/core'
-import Link from 'next/link'
+import { Link } from '../i18n'
 
 export default function ListItemLink (props) {
   const { icon, primary, to, className, actions } = props
@@ -13,7 +13,7 @@ export default function ListItemLink (props) {
       passHref
 
     >
-      <ListItem button className={className} >
+      <ListItem onClick={props.handleDrawerClose} button className={className} >
         {actions ? <ListItemSecondaryAction>
           {actions}
         </ListItemSecondaryAction>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, makeStyles, Link, CardHeader, CardContent, Typography } from '@material-ui/core'
+import { withTranslation } from '../i18n'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Home () {
+function Reachout ({ t }) {
   const classes = useStyles()
 
   const handleSubmit = () => {
@@ -26,17 +27,24 @@ export default function Home () {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title='Welcome to Docudio!' />
+      <CardHeader title={t('cardtitle')} />
       <CardContent>
         <Typography align='center' variant='h3'>
-          Docudio Slack
+          {t('Slack')}
         </Typography>
 
         <Link align='center' color='inherit' target='_blank' rel='noreferrer' href='https://join.slack.com/t/docudio/shared_invite/zt-io1hneog-SX2sVVmRTtf2jh7jybvcKA'>
           <Typography align='center' variant='h5' style={{ marginBottom: '30px' }}>
-Join our slack and ask questions/ask to join! </Typography> </Link>{' '}
+            {t('join')}
+          </Typography> </Link>{' '}
 
       </CardContent>
     </Card>
   )
 }
+
+Reachout.getInitialProps = async () => ({
+  namespacesRequired: ['reachout']
+})
+
+export default withTranslation('reachout')(Reachout)

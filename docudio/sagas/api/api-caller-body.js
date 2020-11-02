@@ -1,4 +1,4 @@
-import { getAuthToken, setAuthToken } from '../utils'
+import { setAuthToken } from '../utils'
 import { call } from 'redux-saga/effects'
 import authAgent from '../app/auth-agent'
 
@@ -10,14 +10,14 @@ export default function * apiCallerBody (request, {
   const props = {
     ...rest,
     headers: {
-      ...headers,
+      ...headers
     //  token: token.access_token
     },
     body: JSON.stringify({
       data: {
         ...rest.body.data
       },
-   //   token: token.access_token,
+      //   token: token.access_token,
       ...rest.body
     }
     )
