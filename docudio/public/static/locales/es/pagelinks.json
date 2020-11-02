@@ -1,10 +1,11 @@
 {
-    "Home": "Casa",
+    "Home": "Hogar",
     "Get Started": "Empezar",
     "Docs": "Docs",
     "Talk with Us!": "¡Habla con nosotros!",
     "Resources": "Recursos",
     "Examples": "Ejemplos",
     "Blog": "Blog",
-    "Github": "Github"
+    "Github": "Github",
+    "Cloud": "Servicios en la nube"
 }
