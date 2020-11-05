@@ -36,6 +36,6 @@ jobs:
           ls -lart
           sudo pm2 stop docudio
           npm install
-          npm run build
+          sudo npm run build
           sudo pm2 start npm --name "docudio" --log /var/log/docudio  -- run start
 
