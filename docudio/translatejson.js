@@ -3,7 +3,7 @@ var TJO = require('translate-json-object')()
 // Choose the service to use google/yandex,
 // if you provide both yandex will be used as the default
 TJO.init({
-  googleApiKey: 'AIzaSyAq-1hC9nQq-WE7w5IxIezZVYcUpnAPHAM'
+  googleApiKey: ''
 })
 
 // An example scenario (json) object
