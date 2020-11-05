@@ -16,6 +16,15 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
+    - name: Publish
+      uses: nogsantos/scp-deploy@master
+      with:
+        src: ./docudio/*
+        host: ${{ secrets.HOST }}
+        user: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        remote: "/home/ubuntu"
+        port: 22
     - name: ssh to server and do things
       uses: appleboy/ssh-action@master
       with:
@@ -23,12 +32,9 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         script: |
-          
-          sudo su
-          cd /root/website
+          cd /home/ubuntu
           ls -lart
-          #pm2 stop docudio
-          #git pull
-          #cd docudio
-          #npm run build
+          sudo pm2 stop docudio
+          sudo npm run build
+          sudo pm2 start npm --name "docudio" --log /var/log/docudio  -- run start
 
