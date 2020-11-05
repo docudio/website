@@ -23,7 +23,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         script: |
-          sudo su -
+          sudo su
           cd /root/website
           ls -lart
           #pm2 stop docudio
