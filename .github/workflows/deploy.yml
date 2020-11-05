@@ -1,0 +1,29 @@
+
+name: Deploy Website
+
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: docudio
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: ssh to server and do things
+      uses: ./
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        script: |
+          sudo su -
+          cd /root/website
+          ls -lart
+          #pm2 stop docudio
+          #git pull
+          #cd docudio
+          #npm run build
+
