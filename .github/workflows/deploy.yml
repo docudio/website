@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deployprod:
     defaults:
       run:
         working-directory: docudio
