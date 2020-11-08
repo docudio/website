@@ -192,12 +192,19 @@ function WrappedApp (props) {
                         <Link
                           href='/'
 
-                        ><Avatar className={classes.large} src='/logo2.png' /></Link>
-                      } variant='contained' color='primary' >  <Link
+                        >
+                        
+                        <Avatar className={classes.large} src='/logo2.png' />
+                        
+                        </Link>
+                      } variant='contained' color='primary' > 
+                      
+                       <Link
                           activeClassName='Mui-selected'
                           href='/'
 
-                        ><Typography variant='h4'> Docudio</Typography></Link>  </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
+                        >
+                        <Typography variant='h4'> Docudio</Typography></Link>  </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
 
                     </Grid>
                   </Hidden>
@@ -205,15 +212,12 @@ function WrappedApp (props) {
                   <Hidden mdUp>
 
                     <Grid item xl={6} xs={7} sm={6} md={6} lg={6}>
+                             <Link
+                          activeClassName='Mui-selected'
+                          href='/'
 
-                      <Typography variant='h4' className={classes.large} style={{ verticalAlign: 'middle' }}>                            <Link
-                        activeClassName='Mui-selected'
-                        href='/'
-                        passHref
-
-                      >
- DOCUDIO   </Link> </Typography>     {/*  <LegacysiteLink /><LoginButton /> */}
-
+                        >
+                        <Typography variant='h4'> DOCUDIO</Typography></Link> 
                     </Grid>
                   </Hidden>
 
