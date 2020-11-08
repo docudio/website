@@ -30,6 +30,7 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
+        command_timeout: 20m
         key: ${{ secrets.KEY }}
         script: |
           cd /home/ubuntu
