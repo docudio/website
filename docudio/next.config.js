@@ -1,8 +1,7 @@
-const withImages = require('next-images')
 const { nextI18NextRewrites } = require('next-i18next/rewrites')
 
 const localeSubpaths = { de: 'de', 'zh-CN': 'zh-CN', es: 'es', fr: 'fr', ja: 'ja', ko: 'ko', pt: 'pt' }
-const imagestuff = withImages({
+const imagestuff = {
   rewrites: async () => nextI18NextRewrites(localeSubpaths),
   publicRuntimeConfig: {
     localeSubpaths,
@@ -17,7 +16,7 @@ const imagestuff = withImages({
     defaultLocale: 'en-US'
 
   }
-})
+}
 module.exports = {
   i18n: {
     locales: ['en', 'zh-CN', 'de', 'es', 'fr', 'ja', 'ko', 'pt'],
