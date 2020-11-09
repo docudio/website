@@ -25,6 +25,15 @@ jobs:
         key: ${{ secrets.KEY }}
         remote: "/home/ubuntu"
         port: 22
+    - name: Publish environmental config
+      uses: nogsantos/scp-deploy@master
+      with:
+        src: ./docudio/.env*
+        host: ${{ secrets.HOST }}
+        user: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        remote: "/home/ubuntu"
+        port: 22
     - name: ssh to server and do things
       uses: appleboy/ssh-action@master
       with:
