@@ -10,6 +10,7 @@ import Footer from '../sharedComponents/footer'
 import '../utils/index.css'
 import Hidden from '@material-ui/core/Hidden'
 import Notifier from '../utils/Notifier'
+import Container from '@material-ui/core/Container'
 import withWidth from '@material-ui/core/withWidth'
 import { Translation } from 'react-i18next'
 import { useRouter } from 'next/router'
@@ -35,60 +36,66 @@ import PageLinks from '../utils/pageLinks'
 import { loadApp } from '../actions'
 import DarkModeToggle from '../utils/DarkModeToggle'
 
-const drawerWidth = 240
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex'
-  },
-  avatarImg: {
-    color: 'transparent',
-    width: '100%',
-    height: '100%',
-    'object-fit': 'cover',
-    'text-align': 'center',
-    'text-indent': '10000px'
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1
-  },
-  drawer: {
-  //  width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    // width: drawerWidth
-  },
-  content: {
-    flexGrow: 1
-  },
-  body: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '90vh'
-  },
-  copyright: {
-    marginTop: 'auto',
-    paddingBottom: '20px'
-  },
-  title: {
-    flexGrow: 1
-  },
-  small: {
-    width: theme.spacing(3),
-    height: theme.spacing(3)
-  },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7)
-  },
-
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar
-}))
-
 function WrappedApp (props) {
+  const { Component, pageProps, width } = props
+  const [open, setOpen] = React.useState(!(width == 'xs' || width == 'sm'))
+  const drawerWidth = React.useMemo(
+    () =>
+      open ? 240 : 0,
+    [open]
+  )
+
+  const useStyles = makeStyles(theme => ({
+    root: {
+      display: 'flex'
+    },
+    avatarImg: {
+      color: 'transparent',
+      width: '100%',
+      height: '100%',
+      'object-fit': 'cover',
+      'text-align': 'center',
+      'text-indent': '10000px'
+    },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0
+    },
+    drawerPaper: {
+    // width: drawerWidth
+    },
+    content: {
+      flexGrow: 1
+    },
+    body: {
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '90vh'
+    },
+    copyright: {
+      marginTop: 'auto',
+      paddingBottom: '20px'
+    },
+    title: {
+      flexGrow: 1
+    },
+    small: {
+      width: theme.spacing(3),
+      height: theme.spacing(3)
+    },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7)
+    },
+
+    // necessary for content to be below app bar
+    toolbar: theme.mixins.toolbar
+  }))
   const classes = useStyles()
+
   const dispatch = useDispatch()
   const appLoaded = true
   const router = useRouter()
@@ -100,8 +107,6 @@ function WrappedApp (props) {
       i18n.changeLanguage(router.locale)
     }
   }, [dispatch, appLoaded, router])
-  const { Component, pageProps, width } = props
-  const [open, setOpen] = React.useState(!(width == 'xs' || width == 'sm'))
 
   const handleDrawerOpen = () => {
     if (open === true) {
@@ -193,18 +198,18 @@ function WrappedApp (props) {
                           href='/'
 
                         >
-                        
-                        <Avatar className={classes.large} src='/logo2.png' />
-                        
+
+                          <Avatar className={classes.large} src='/logo2.png' />
+
                         </Link>
-                      } variant='contained' color='primary' > 
-                      
-                       <Link
+                      } variant='contained' color='primary' >
+
+                        <Link
                           activeClassName='Mui-selected'
                           href='/'
 
                         >
-                        <Typography variant='h4'> Docudio</Typography></Link>  </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
+                          <Typography variant='h4'> Docudio</Typography></Link>  </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
 
                     </Grid>
                   </Hidden>
@@ -212,12 +217,12 @@ function WrappedApp (props) {
                   <Hidden mdUp>
 
                     <Grid item xl={6} xs={7} sm={6} md={6} lg={6}>
-                             <Link
-                          activeClassName='Mui-selected'
-                          href='/'
+                      <Link
+                        activeClassName='Mui-selected'
+                        href='/'
 
-                        >
-                        <Typography variant='h4'> DOCUDIO</Typography></Link> 
+                      >
+                        <Typography variant='h4'> DOCUDIO</Typography></Link>
                     </Grid>
                   </Hidden>
 
@@ -232,39 +237,32 @@ function WrappedApp (props) {
 
               </Toolbar>
             </AppBar>
-            <Grid container direction='row'
-              spacing={1} >
-              <Grid item xl={1} sm={2} md={2} lg={2} >
 
-                <Drawer
-                  variant='persistent'
-                  open={open}
-                  classes={{
-                    paper: classes.drawerPaper
-                  }}
-                  className={classes.drawer}
-                >
-                  <div className={classes.toolbar} />
-                  <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </div>
-                  <PageLinks handleDrawerClose={width === 'xs' || width === 'sm' ? handleDrawerClose : undefined}/>
-                  <Divider />
-                </Drawer>
-              </Grid>
-              <Grid item xl={11} sm={10} md={10} lg={10} >
+            <Drawer
+              variant='persistent'
+              open={open}
+              classes={{
+                paper: classes.drawerPaper
+              }}
+              className={classes.drawer}
+            >
+              <div className={classes.toolbar} />
+              <div className={classes.drawerHeader}>
+                <IconButton onClick={handleDrawerClose}>
+                  <ChevronLeftIcon />
+                </IconButton>
+              </div>
+              <PageLinks handleDrawerClose={width === 'xs' || width === 'sm' ? handleDrawerClose : undefined}/>
+              <Divider />
+            </Drawer>
 
-                <main className={classes.content}>
-                  <div className={classes.toolbar} />
+            <main className={classes.content}>
+              <Container className={classes.body} maxWidth={false}>
 
-                  <Component {...pageProps} />
-                  <Notifier />
+                <Component {...pageProps} />
+                <Notifier />
 
-                  <Footer />                </main>
-              </Grid>
-            </Grid>
+                <Footer />         </Container>       </main>
 
           </div>
         </SnackbarProvider >
