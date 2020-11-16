@@ -146,6 +146,9 @@ function WrappedApp (props) {
   theme.typography.subtitle1 = { 'font-family': ['Hammersmith One', 'sans-serif'] }
   theme.typography.subtitle2 = { 'font-family': ['Hammersmith One', 'sans-serif'] }
 
+
+
+  
   const notistackRef = React.createRef()
   const onClickDismiss = key => () => {
     notistackRef.current.closeSnackbar(key)
@@ -262,7 +265,11 @@ function WrappedApp (props) {
                 <Component {...pageProps} />
                 <Notifier />
 
-                <Footer />         </Container>       </main>
+                <Footer />         
+                
+                </Container>    
+                
+                   </main>
 
           </div>
         </SnackbarProvider >

@@ -1,3 +1,4 @@
+import Post from '../pages/blog/types/Post'
 const generateRssItem = (post: Post): string => `
   <item>
     <guid>https://docudio.com/${post.slug}</guid>

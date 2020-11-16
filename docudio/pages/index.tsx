@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { Card, makeStyles, Link, CardHeader, CardContent, Typography, Button, Grid, TextField, Tooltip } from '@material-ui/core'
 import { withTranslation } from '../i18n'
 import DocDivider from '../utils/DocDivider'
@@ -24,12 +24,12 @@ function Home ({ t }) {
     setemail('')
   }
 
-  const handleEmail = (event) => {
+  const handleEmail = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setemail(event.target.value)
   }
 
-  const [submitted, setsubmitted] = React.useState(false)
-  const [email, setemail] = React.useState('')
+  const [submitted, setsubmitted]: [boolean,Dispatch<SetStateAction<boolean>>] = React.useState(false)
+  const [email, setemail]: [string,Dispatch<SetStateAction<string>>] = React.useState('')
 
   return (
     <Card className={classes.root}>

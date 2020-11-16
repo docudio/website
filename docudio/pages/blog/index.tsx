@@ -14,6 +14,7 @@ import DocDivider from '../../utils/DocDivider'
 import DateFormatter from '../../utils/dateFormatter'
 // import Image from '/blogheader.png'; // Import using relative path
 import generateRss from '../../lib/rss'
+import Post from './types/Post'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +43,7 @@ export default function blogIndex ({ posts }) {
 
   const router = useRouter()
 
-  const heroPost = posts[0]
+  const heroPost: Post = posts[0]
   const morePosts = posts.slice(1, 3)
   const shareBlockProps = {
     url: 'https://www.docudio.com/blog/' + heroPost.slug,
@@ -102,7 +103,7 @@ Share</Typography>
         <Grid container direction='row'
           spacing={4} >
 
-          { morePosts.map((item, index) => {
+          { morePosts.map((item: Post , index: Dict) => {
             return (
               <Grid item xl={4} xs={12} sm={12} md={6} lg={4} >
 
@@ -158,7 +159,7 @@ Share</Typography>
 }
 
 export async function getStaticProps ({ params, locale }) {
-  const allPosts = getAllPosts(locale, [
+  const allPosts: Array<Post> = getAllPosts(locale, [
     'title',
     'date',
     'slug',
