@@ -1,0 +1,51 @@
+
+name: Deploy Website
+
+on:
+  push:
+    branches: [ release ]
+  workflow_dispatch:
+
+jobs:
+  deployprod:
+    defaults:
+      run:
+        working-directory: docudio
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: Publish
+      uses: nogsantos/scp-deploy@master
+      with:
+        src: ./docudio/*
+        host: ${{ secrets.HOST }}
+        user: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        remote: "/home/ubuntu"
+        port: 22
+    - name: Publish environmental config
+      uses: nogsantos/scp-deploy@master
+      with:
+        src: ./docudio/.env*
+        host: ${{ secrets.HOST }}
+        user: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        remote: "/home/ubuntu"
+        port: 22
+    - name: ssh to server and do things
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        command_timeout: 20m
+        key: ${{ secrets.KEY }}
+        script: |
+          cd /home/ubuntu
+          ls -lart
+          sudo pm2 stop docudio
+          npm install
+          sudo npm run build
+          sudo pm2 start npm --name "docudio" --log /var/log/docudio  -- run start
+

@@ -14,7 +14,7 @@ async function asyncForEach (array, callback) {
 // Choose the service to use google/yandex,
 // if you provide both yandex will be used as the default
 TJO.init({
-  googleApiKey: 'AIzaSyAq-1hC9nQq-WE7w5IxIezZVYcUpnAPHAM'
+  googleApiKey: ''
 })
 const postsDirectory = path.join(process.cwd(), '_posts')
 const waitFor = (ms) => new Promise(r => setTimeout(r, ms))
@@ -62,8 +62,8 @@ asyncForEach(allposts, async (post) => {
         src: './temp_markdown.md',
         from: 'en',
         to: locale,
-        subscriptionKey: '3999e2ca6ae74f59b9682b5cba71c79e',
-        region: 'eastus'
+        subscriptionKey: '',
+        region: ''
       }).then(res => {
         fs.appendFileSync(`./_posts/${post}/${locale}/${post}.md`, res, function (err, result) {
           console.log('WOAH')
