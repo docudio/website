@@ -1,6 +1,6 @@
 ---
-title: "Welcome to selfService by Docudio"
-excerpt: "An introduction to what selfService is about, how Docudio is closely tied to it, and how others can learn more about it."
+title: "Welcome to selfServices by Docudio"
+excerpt: "An introduction to what selfServices is about, how Docudio is closely tied to it, and how others can learn more about it."
 date: "2021-01-11T12:00:00.000Z"
 author:
   name: "Miclain Keffeler"

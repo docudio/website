@@ -1,6 +1,6 @@
 ---
 title: 欢迎使用Docudio自助服务
-excerpt: 介绍自助服务的内容，Docudio如何与之紧密联系以及其他人如何了解它。
+excerpt: 介绍自助服务的内容，Docudio如何与之紧密联系以及其他人如何了解更多有关自助服务的知识。
 date: '2021-01-11T12:00:00.000Z'
 author:
   name: 米克兰·凯夫勒（Miclain Keffeler）

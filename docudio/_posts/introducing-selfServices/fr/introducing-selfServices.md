@@ -1,7 +1,7 @@
 ---
-title: Bienvenue sur selfService by Docudio
+title: Bienvenue sur selfServices by Docudio
 excerpt: >-
-  Une introduction à ce qu'est le selfService, à la manière dont Docudio y est
+  Une introduction à ce qu'est les selfServices, à la manière dont Docudio y est
   étroitement lié et à la manière dont les autres peuvent en savoir plus.
 date: '2021-01-11T12:00:00.000Z'
 author:

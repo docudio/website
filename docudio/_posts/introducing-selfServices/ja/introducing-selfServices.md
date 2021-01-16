@@ -1,7 +1,6 @@
 ---
-title: Docudioによるセルフサービスへようこそ
-excerpt: >-
-  selfServiceとは何か、Docudioがどのように密接に関連しているか、他の人がどのようにselfServiceについて学ぶことができるかについての紹介。
+title: DocudioによるselfServicesへようこそ
+excerpt: selfServicesとは何か、Docudioがどのように密接に関連しているか、他の人がどのようにそれについてもっと学ぶことができるかについての紹介。
 date: '2021-01-11T12:00:00.000Z'
 author:
   name: Miclain Keffeler

@@ -1,8 +1,8 @@
 ---
-title: Willkommen bei selfService von Docudio
+title: Willkommen bei selfServices von Docudio
 excerpt: >-
-  Eine Einführung in SelfService, wie Docudio eng damit verbunden ist und wie
-  andere mehr darüber erfahren können.
+  Eine Einführung in das, worum es bei selfServices geht, wie Docudio eng damit
+  verbunden ist und wie andere mehr darüber erfahren können.
 date: '2021-01-11T12:00:00.000Z'
 author:
   name: Miclain Keffeler
