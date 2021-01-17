@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { MakeStore, createWrapper } from 'next-redux-wrapper'
 import combineReducers from '../reducers/reducer'
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
@@ -19,15 +18,16 @@ import '../utils/App.css'
 import { i18n, appWithTranslation } from '../i18n'
 import Head from 'next/head'
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, Provider } from 'react-redux'
 import Drawer from '@material-ui/core/Drawer'
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
+import store from '../store'
 
-import { Grid, IconButton, CssBaseline, Button, Avatar } from '@material-ui/core'
+import { Grid, IconButton, CssBaseline, Button, Avatar, useTheme, useMediaQuery } from '@material-ui/core'
 import clsx from 'clsx'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
@@ -37,6 +37,18 @@ import { loadApp } from '../actions'
 import DarkModeToggle from '../utils/DarkModeToggle'
 
 function WrappedApp (props) {
+  const { Component, pageProps } = props
+  const router = useRouter()
+
+  return (
+    <Provider store={store}>
+      <RootPage {...props} />
+    </Provider>
+
+  )
+}
+
+function RootPage (props) {
   const { Component, pageProps, width } = props
   const [open, setOpen] = React.useState(!(width == 'xs' || width == 'sm'))
   const drawerWidth = React.useMemo(
@@ -94,7 +106,28 @@ function WrappedApp (props) {
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar
   }))
+  const shouldCollapse = React.useMemo(
+    () => (width === 'xs' || width === 'sm')
+    ,
+    [width]
+  )
+
+  const handleDrawerClose = () => {
+    setOpen(false)
+  }
+
+  useEffect(() => {
+    setOpen(!shouldCollapse)
+  }, [shouldCollapse])
+
   const classes = useStyles()
+  const handleDrawerOpen = () => {
+    if (open === true) {
+      setOpen(false)
+    } else {
+      setOpen(true)
+    }
+  }
 
   const dispatch = useDispatch()
   const appLoaded = true
@@ -107,18 +140,6 @@ function WrappedApp (props) {
       i18n.changeLanguage(router.locale)
     }
   }, [dispatch, appLoaded, router])
-
-  const handleDrawerOpen = () => {
-    if (open === true) {
-      setOpen(false)
-    } else {
-      setOpen(true)
-    }
-  }
-
-  const handleDrawerClose = () => {
-    setOpen(false)
-  }
 
   const ThemePreference = useSelector(state => state.theme.preferred)
   const theme = React.useMemo(
@@ -134,54 +155,51 @@ function WrappedApp (props) {
       }),
     [ThemePreference]
   )
+  const themeHook = useTheme()
 
-  React.useEffect(() => {
-  // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles)
-    }
-  }, [])
-
+  const matches = useMediaQuery(themeHook.breakpoints.up('sm'))
   theme.typography.subtitle1 = { 'font-family': ['Hammersmith One', 'sans-serif'] }
   theme.typography.subtitle2 = { 'font-family': ['Hammersmith One', 'sans-serif'] }
 
-
-
-  
   const notistackRef = React.createRef()
   const onClickDismiss = key => () => {
     notistackRef.current.closeSnackbar(key)
   }
 
   return (
-    <React.Fragment>
-      <Head>
-        <title>Docudio</title>
-        <script src='/env.js'></script>
+    <>
+    <Head>
+      <title>Docudio</title>
+      <script src='/env.js'></script>
 
-        <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width' />
-      </Head>
+      <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width' />
+    </Head>
+
+    <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <SnackbarProvider ref={notistackRef} action={(key) => (
-          <Button onClick={onClickDismiss(key)}>
-            <Translation ns='_app'>
-              {
-                (t, { i18n }) => <p>{t('Dismiss')}</p>
-              }
-            </Translation>
-          </Button>
-        )}
-        maxSnack={3} >
+        <SnackbarProvider
+          ref={notistackRef} action={(key) => (
+            <Button onClick={onClickDismiss(key)}>
+              <Translation ns='_app'>
+                {
+                  (t, { i18n }) => <p>{t('Dismiss')}</p>
+                }
+              </Translation>
+            </Button>
+          )}
+          maxSnack={3}
+        >
 
           <div className={classes.root}>
             <CssBaseline />
             <AppBar position='fixed' className={classes.appBar}>
               <Toolbar>
 
-                <Grid container direction='row'
-                  spacing={4} >
-                  <Grid item xl={2} xs={4} sm={2} md={2} lg={2} >
+      <Grid
+                  container direction='row'
+                  spacing={4}
+                >
+                  <Grid item xl={2} xs={4} sm={2} md={2} lg={2}>
                     <IconButton
                       color='inherit'
                       aria-label='open drawer'
@@ -196,23 +214,26 @@ function WrappedApp (props) {
 
                     <Grid item xl={6} xs={7} sm={6} md={6} lg={6}>
 
-                      <Button size='large' className={classes.large} startIcon={
-                        <Link
-                          href='/'
+                      <Button
+                        size='large' className={classes.large} startIcon={
+                          <Link
+    href='/'
+  >
 
-                        >
+    <Avatar className={classes.large} src='/logo2.png' />
 
-                          <Avatar className={classes.large} src='/logo2.png' />
-
-                        </Link>
-                      } variant='contained' color='primary' >
+  </Link>
+                      } variant='contained' color='primary'
+                      >
 
                         <Link
                           activeClassName='Mui-selected'
                           href='/'
 
                         >
-                          <Typography variant='h4'> Docudio</Typography></Link>  </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
+                          <Typography variant='h4'> Docudio</Typography>
+                        </Link>
+                      </Button>         {/*  <LegacysiteLink /><LoginButton /> */}
 
                     </Grid>
                   </Hidden>
@@ -225,7 +246,8 @@ function WrappedApp (props) {
                         href='/'
 
                       >
-                        <Typography variant='h4'> DOCUDIO</Typography></Link>
+                        <Typography variant='h4'> DOCUDIO</Typography>
+                      </Link>
                     </Grid>
                   </Hidden>
 
@@ -238,69 +260,50 @@ function WrappedApp (props) {
 
                 </Grid>
 
-              </Toolbar>
+    </Toolbar>
             </AppBar>
 
             <Drawer
               variant='persistent'
               open={open}
               classes={{
-                paper: classes.drawerPaper
-              }}
+      paper: classes.drawerPaper
+    }}
               className={classes.drawer}
             >
               <div className={classes.toolbar} />
               <div className={classes.drawerHeader}>
-                <IconButton onClick={handleDrawerClose}>
+      <IconButton onClick={handleDrawerClose}>
                   <ChevronLeftIcon />
                 </IconButton>
-              </div>
-              <PageLinks handleDrawerClose={width === 'xs' || width === 'sm' ? handleDrawerClose : undefined}/>
+    </div>
+              <PageLinks handleDrawerClose={width === 'xs' || width === 'sm' ? handleDrawerClose : undefined} />
               <Divider />
             </Drawer>
 
             <main className={classes.content}>
               <Container className={classes.body} maxWidth={false}>
 
-                <Component {...pageProps} />
-                <Notifier />
+      <Component {...pageProps} />
+      <Notifier />
 
-                <Footer />         
-                
-                </Container>    
-                
-                   </main>
+      <Footer />
+
+    </Container>
+
+            </main>
 
           </div>
-        </SnackbarProvider >
-
+        </SnackbarProvider>
       </ThemeProvider>
-    </React.Fragment>
+    </Provider>
+    </>
+
   )
 }
-export const makeStore: MakeStore = () => {
-  // 1: Create the middleware
-  const sagaMiddleware = createSagaMiddleware()
-  const storeEnhancers = compose
-
-  // 2: Add an extra parameter for applying middleware:
-  const store = createStore(combineReducers, storeEnhancers(applyMiddleware(sagaMiddleware)))
-
-  // 3: Run your sagas on server
-  sagaMiddleware.run(rootSaga)
-
-  // 4: now return the store:
-  return store
-}
-
-export const wrapper = createWrapper(makeStore, { debug: true })
-
 WrappedApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext)
   return { ...appProps, namespacesRequired: ['_app'] }
 }
 
-export default withWidth()(wrapper.withRedux(appWithTranslation(WrappedApp)))
-
-// makeStore function that returns a new store for every request
-// apm.setInitialPageLoadName('Docudio Landing Page')
+export default withWidth()(appWithTranslation(WrappedApp))
