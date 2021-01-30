@@ -1,3 +1,13 @@
+---
+title: "Welcome to Docudio Lab"
+excerpt: "An introduction to what Docudio Lab is about, how Docudio is closely tied to it, and how others can learn more about it."
+date: "2021-01-11T12:00:00.000Z"
+author:
+  name: "Miclain Keffeler"
+  picture: "/assets/blog/authors/jj.jpeg"
+ogImage:
+  url: "/assets/blog/dynamic-routing/cover.jpg"
+---
 
 # Docudio Lab
 our Lab is a innovation space, that many in the industry have adopted, but that we are especially passionate about. Innovation is a way of life for us at Docudio, we don't enjoy roadblocks, and it reflects in how we do business, and want to share our experiences through this platform.
