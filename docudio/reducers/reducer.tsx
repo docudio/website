@@ -1,6 +1,7 @@
 import common from './common'
 import auth from './auth'
 import theme from './theme'
+import signup from './signup'
 import { combineReducers } from 'redux'
 
 export interface State {
@@ -11,6 +12,7 @@ export interface State {
 export default combineReducers({
   common,
   auth,
-  theme
+  theme,
+  signup
 
 })

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import combineReducers from '../reducers/reducer'
-import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from '../sagas/root-saga'
 import Link from 'next/link'
@@ -53,7 +52,7 @@ function RootPage (props) {
   const [open, setOpen] = React.useState(!(width == 'xs' || width == 'sm'))
   const drawerWidth = React.useMemo(
     () =>
-      open ? 240 : 0,
+      open ? (width == 'xs' || width == 'sm') ? 120: 240 : 0,
     [open]
   )
 
@@ -148,7 +147,7 @@ function RootPage (props) {
         palette: {
           type: ThemePreference === true ? 'dark' : 'light',
           primary: { main: '#000000' },
-          secondary: { main: '#dbdbdb' }
+          secondary: { main: '#aa1111' }
         },
         typography: { fontFamily: ['Montserrat'].join(',') }
 
@@ -161,7 +160,7 @@ function RootPage (props) {
   theme.typography.subtitle1 = { 'font-family': ['Hammersmith One', 'sans-serif'] }
   theme.typography.subtitle2 = { 'font-family': ['Hammersmith One', 'sans-serif'] }
 
-  const notistackRef = React.createRef()
+  const notistackRef: any = React.createRef()
   const onClickDismiss = key => () => {
     notistackRef.current.closeSnackbar(key)
   }
@@ -175,7 +174,6 @@ function RootPage (props) {
       <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width' />
     </Head>
 
-    <Provider store={store}>
       <ThemeProvider theme={theme}>
         <SnackbarProvider
           ref={notistackRef} action={(key) => (
@@ -205,7 +203,7 @@ function RootPage (props) {
                       aria-label='open drawer'
                       onClick={handleDrawerOpen}
                       edge='start'
-                      className={clsx(classes.menuButton, open && classes.hide)}
+                      className={clsx(open)}
                     >
                       <MenuIcon />
                     </IconButton>
@@ -227,7 +225,6 @@ function RootPage (props) {
                       >
 
                         <Link
-                          activeClassName='Mui-selected'
                           href='/'
 
                         >
@@ -242,7 +239,6 @@ function RootPage (props) {
 
                     <Grid item xl={6} xs={7} sm={6} md={6} lg={6}>
                       <Link
-                        activeClassName='Mui-selected'
                         href='/'
 
                       >
@@ -272,7 +268,7 @@ function RootPage (props) {
               className={classes.drawer}
             >
               <div className={classes.toolbar} />
-              <div className={classes.drawerHeader}>
+              <div >
       <IconButton onClick={handleDrawerClose}>
                   <ChevronLeftIcon />
                 </IconButton>
@@ -296,7 +292,6 @@ function RootPage (props) {
           </div>
         </SnackbarProvider>
       </ThemeProvider>
-    </Provider>
     </>
 
   )

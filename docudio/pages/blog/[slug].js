@@ -3,7 +3,7 @@ import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import { Link } from '../../i18n'
 import React from 'react'
-import { makeStyles, Grid, Button, Typography } from '@material-ui/core'
+import { makeStyles, Grid, Button, Typography, Paper } from '@material-ui/core'
 
 import ShareBlockStandard from '../../sharedComponents/ShareBlockStandard'
 import ShareButtonCircle from '../../sharedComponents/ShareButtonCircle'
@@ -25,6 +25,10 @@ const useStyles = makeStyles(theme => ({
   },
   background: {
     backgroundColor: '#a0a0a0',
+    padding: theme.spacing(3, 3, 3, 3)
+  },
+  paper: {
+    margin: theme.spacing(3, 3, 3, 3),
     padding: theme.spacing(3, 3, 3, 3)
   },
   postbody: {
@@ -78,10 +82,9 @@ function Post ({ post, morePosts, preview }) {
     { language: 'pt', text: 'Português' }
   ]
   return (
-    <>
+    <Paper className={classes.paper}>
       <DocDivider />
       <Link
-        activeClassName='Mui-selected'
         href='/blog/welcome-to-docudio'
         passHref
 
@@ -99,11 +102,11 @@ Language</Typography>
           <Grid container direction='row'
             spacing={1} >
 
-            {buttons.map(button => {
+            {buttons.map((button, index) => {
               const { language, text } = button
 
               return (
-                <Grid item xl='auto' xs={3} sm={3} md='auto' lg='auto' >
+                <Grid item xl='auto'  md='auto' lg='auto' key={index}>
                   <Button
                     variant='outlined'
                     size='small'
@@ -141,7 +144,8 @@ Share</Typography>
         </div>
 
       </article>
-    </>
+
+    </Paper>
 
   )
 }

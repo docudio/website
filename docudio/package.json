@@ -63,7 +63,7 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "manage:translations": "node ./translationRunner.js",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "build": "next build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -78,6 +78,9 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "engines":{
+    "node": "12.13.0"
   },
   "browserslist": [
     "defaults",

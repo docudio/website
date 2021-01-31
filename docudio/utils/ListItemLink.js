@@ -8,7 +8,6 @@ export default function ListItemLink (props) {
 
   return (
     <Link
-      activeClassName='Mui-selected'
       href={to}
       passHref
 
