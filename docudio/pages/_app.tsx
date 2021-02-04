@@ -262,10 +262,6 @@ function RootPage (props) {
             <Drawer
               variant='persistent'
               open={open}
-              classes={{
-      paper: classes.drawerPaper
-    }}
-              className={classes.drawer}
             >
               <div className={classes.toolbar} />
               <div >
